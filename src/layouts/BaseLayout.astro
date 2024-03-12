@@ -9,14 +9,28 @@ import Footer from "../components/Footer.astro";
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+        <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+        <script src="/pagefind/pagefind-ui.js" is:inline></script>
         <title>Astro</title>
     </head>
     <body>
-        <h1>Welcome to My Blog</h1>
+        <h2>Welcome to My Blog</h2>
         <Navigation />
-        <main>
+        <main data-pagefind-body>
+            <div id="search"></div>
             <slot />
         </main>
         <Footer />
     </body>
+    <script>
+        window.addEventListener("DOMContentLoaded", (event) => {
+            //@ts-ignore
+            new PagefindUI({
+                element: "#search",
+                showSubResults: true,
+                highlightParam: "highlight",
+                showImages: false,
+            });
+        });
+    </script>
 </html>

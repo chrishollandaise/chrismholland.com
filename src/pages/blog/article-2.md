@@ -10,7 +10,7 @@ draft: false
 tags: ["astro", "react"]
 ---
 
-# Semeleia his dea ex alter ite este
+# This is article 2 
 
 ## Nubes honore
 
