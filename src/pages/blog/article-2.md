@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BaseLayout.astro
+layout: ../../layouts/PostLayout.astro
 title: My Second Article
 description: "Here's a description of what this does for me."
 image:
@@ -9,8 +9,6 @@ pubDate: 2022-08-08
 draft: false
 tags: ["astro", "react"]
 ---
-
-# This is article 2 
 
 ## Nubes honore
 

@@ -1,0 +1,38 @@
+---
+const { frontmatter } = Astro.props;
+import BaseLayout from "./BaseLayout.astro";
+import Image from "astro/components/Image.astro";
+---
+
+<BaseLayout>
+    {
+        frontmatter.image ? (
+            <Image
+                src={frontmatter.image.url}
+                alt={frontmatter.image.alt}
+                data-pagefind-meta="image[src], image_alt[alt]"
+                width={600}
+                height={400}
+            />
+        ) : null
+    }
+
+    <h1 data-pagefind-meta="title">{frontmatter.title}</h1>
+    <p>{frontmatter.description}</p>
+    {
+        !frontmatter.draft ? (
+            <p>{new Date(frontmatter.pubDate).toLocaleDateString("en-US")}</p>
+        ) : null
+    }
+    <ul>
+        {
+            frontmatter.tags.map((tag: string) => (
+                <li>
+                    <a href={`/tags/${tag}`}>{tag}</a>
+                </li>
+            ))
+        }
+    </ul>
+
+    <slot />
+</BaseLayout>

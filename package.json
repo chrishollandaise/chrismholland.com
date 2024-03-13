@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --remote",
     "start": "astro dev",
     "build:pagefind": "npx pagefind --site 'dist' && cp -r dist/pagefind public/",
     "build": "astro check && astro build && npm run build:pagefind",
@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.5.7",
+    "@astrojs/db": "^0.8.1",
+    "@types/nodemailer": "^6.4.14",
     "astro": "^4.5.1",
+    "nodemailer": "^6.9.12",
     "typescript": "^5.4.2"
   }
 }

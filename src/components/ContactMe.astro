@@ -1,0 +1,54 @@
+---
+import { db, Contact } from "astro:db";
+
+if (Astro.request.method === "POST") {
+    try {
+        const data = await Astro.request.formData();
+        const name = data.get("name");
+        const email = data.get("email");
+        const message = data.get("message");
+        const dateSent = new Date();
+        const clientIP = Astro.clientAddress;
+
+        const submission = {
+            name,
+            email,
+            message,
+            dateSent,
+            metadata: { ip: clientIP },
+        };
+
+        //@ts-ignore
+        await db.insert(Contact).values(submission);
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+}
+---
+
+<section>
+    <h2>Contact Me</h2>
+    <form method="POST">
+        <label>
+            Name:
+            <input type="text" name="name" placeholder="Bobby John" required />
+        </label>
+        <label>
+            Email:
+            <input
+                type="email"
+                name="email"
+                placeholder="bobbyjohn@email.com"
+                required
+            />
+        </label>
+        <label>
+            Message:
+            <textarea name="message" cols="50" maxlength="1250" required
+            ></textarea>
+        </label>
+        <button>Submit</button>
+    </form>
+</section>
