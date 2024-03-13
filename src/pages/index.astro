@@ -1,16 +1,80 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactMe from "../components/ContactMe.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
 ---
 
 <BaseLayout>
 	<h2>Welcome!</h2>
 	<p>Here's a description about what this page is about</p>
 	<section>
-		<h2>Latest Projects</h2>
+		<h2>Latest Posts</h2>
+		{
+			(
+				<table>
+					<thead>
+						<th>Date</th>
+						<th>Article</th>
+						<th>Tags</th>
+					</thead>
+					<tbody>
+						{allPosts.map((post) => (
+							<tr>
+								<td>
+									<a href={`blog/${post.slug}`}>
+										{new Date(
+											post.data.pubDate,
+										).toLocaleDateString("en-US")}
+									</a>
+								</td>
+								<td>
+									<a href={`blog/${post.slug}`}>
+										{post.data.title}
+									</a>
+								</td>
+								<td>
+									<a href={`blog/${post.slug}`}>
+										{post.data.tags.join(", ")}
+									</a>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
 	</section>
 	<section>
 		<h2>Highlighted Projects</h2>
+		{
+			allPosts
+				.filter((post) => post.data.tags.includes("project"))
+				.map((post) => {
+					return (
+						<tr>
+							<td>
+								<a href={`blog/${post.slug}`}>
+									{new Date(
+										post.data.pubDate,
+									).toLocaleDateString("en-US")}
+								</a>
+							</td>
+							<td>
+								<a href={`blog/${post.slug}`}>
+									{post.data.title}
+								</a>
+							</td>
+							<td>
+								<a href={`blog/${post.slug}`}>
+									{post.data.tags.join(", ")}
+								</a>
+							</td>
+						</tr>
+					);
+				})
+		}
 	</section>
 	<ContactMe />
 </BaseLayout>

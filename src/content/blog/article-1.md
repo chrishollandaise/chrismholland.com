@@ -5,7 +5,7 @@ description: "Here's a description of what this does for me."
 image:
     url: "https://docs.astro.build/default-og-image.png"
     alt: "The word astro against an illustration of planets and stars."
-pubDate: 2022-08-08
+pubDate: 2024-03-13
 draft: false
 tags: ["astro", "successes"]
 ---
