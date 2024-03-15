@@ -1,13 +1,16 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: My Second Article
-description: "Here's a description of what this does for me."
+description: Here's a description of what this does for me.
 image:
-    url: "https://docs.astro.build/default-og-image.png"
-    alt: "The word astro against an illustration of planets and stars."
+  url: https://docs.astro.build/default-og-image.png
+  alt: The word astro against an illustration of planets and stars.
 pubDate: 2022-08-08
 draft: false
-tags: ["astro", "react"]
+tags:
+  - astrojs
+  - react
+type: blog
 ---
 
 ## Nubes honore
@@ -55,3 +58,8 @@ artes fera** lentae: est more subsidit. **Vidi Melaneus vaticinatus** data rima:
 arcum nostro, est. Sedens repugnas nostris pennas concurreret truncos sorori et
 loquebatur vincula hortaturque post: gaudere verbaque est ea plebi ab duorum.
 Captus fatebar quoque tu sinit sit agam sed Titania!
+
+```js
+const message = Hello World!
+1 + 1
+```

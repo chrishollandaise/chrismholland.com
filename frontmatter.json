@@ -2,50 +2,67 @@
   "$schema": "https://frontmatter.codes/frontmatter.schema.json",
   "frontMatter.taxonomy.contentTypes": [
     {
-      "name": "default",
+      "name": "blog",
+      "previewPath": "'blog'",
       "pageBundle": false,
-      "previewPath": null,
+      "clearEmpty": true,
       "fields": [
         {
-          "title": "Title",
           "name": "title",
-          "type": "string"
+          "type": "string",
+          "single": true,
+          "required": true
         },
         {
-          "title": "Description",
           "name": "description",
-          "type": "string"
+          "type": "string",
+          "single": true,
+          "required": true
         },
         {
-          "title": "Publishing date",
-          "name": "date",
+          "name": "image",
+          "type": "image",
+          "required": true,
+          "isPreviewImage": true
+        },
+        {
+          "name": "pubDate",
           "type": "datetime",
           "default": "{{now}}",
-          "isPublishDate": true
+          "required": true
         },
         {
-          "title": "Content preview",
-          "name": "preview",
-          "type": "image"
-        },
-        {
-          "title": "Is in draft",
           "name": "draft",
-          "type": "draft"
+          "type": "draft",
+          "required": true
         },
         {
-          "title": "Tags",
           "name": "tags",
-          "type": "tags"
+          "type": "tags",
+          "required": true
         },
         {
-          "title": "Categories",
-          "name": "categories",
-          "type": "categories"
+          "title": "layout",
+          "name": "layout",
+          "type": "string"
         }
       ]
     }
   ],
   "frontMatter.framework.id": "astro",
-  "frontMatter.preview.host": "http://localhost:4321"
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "blog",
+      "path": "[[workspace]]/src/content/blog",
+      "contentTypes": [
+        "blog"
+      ]
+    }
+  ],
+  "frontMatter.content.publicFolder": {
+    "path": "src/assets",
+    "relative": true
+  },
+  "frontMatter.git.enabled": true
 }
