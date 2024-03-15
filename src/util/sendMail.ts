@@ -1,26 +1,23 @@
 import nodemailer from "nodemailer"
+import createEmailTemplate from "./template/email";
+import { toTitleCase } from "./util";
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // Use `true` for port 465, `false` for all other ports
+    service: "gmail",
     auth: {
-        user: "maddison53@ethereal.email",
-        pass: "jn7jnAPss4f63QBp6D",
+        user: import.meta.env.PROXY_EMAIL,
+        pass: import.meta.env.PROXY_EMAIL_PASSWORD,
     },
 });
 
 // async..await is not allowed in global scope, must use a wrapper
-export default async function sendMail() {
+export default async function sendMail(submission: any) {
     // send mail with defined transport object
     const info = await transporter.sendMail({
-        from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
-        to: "bar@example.com, baz@example.com", // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
+        from: `"donotreply" <${import.meta.env.SENDER_EMAIl}>`, // sender address
+        to: `${import.meta.env.RECIPIENT_EMAIL}`, // list of receivers
+        subject: `You got mail from ${toTitleCase(submission.name)}!`, // Subject line
+        text: `${submission.name}, from an email address of ${submission.email} and IP of ${submission.metadata.ip}, sent you the following message.\n${submission.message}`, // plain text body
+        html: createEmailTemplate(submission), // html body
     });
-
-    console.log("Message sent: %s", info.messageId);
-    // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
 }

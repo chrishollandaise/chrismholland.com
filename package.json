@@ -17,9 +17,7 @@
     "@astrojs/sitemap": "^3.1.1",
     "@types/nodemailer": "^6.4.14",
     "astro": "^4.5.1",
-    "markdown-it": "^14.0.0",
     "nodemailer": "^6.9.12",
-    "sanitize-html": "^2.12.1",
     "typescript": "^5.4.2"
   },
   "devDependencies": {

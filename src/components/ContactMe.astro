@@ -1,5 +1,6 @@
 ---
 import { db, Contact } from "astro:db";
+import sendMail from "../util/sendMail";
 
 if (Astro.request.method === "POST") {
     try {
@@ -17,9 +18,11 @@ if (Astro.request.method === "POST") {
             dateSent,
             metadata: { ip: clientIP },
         };
-
+        // TODO: add a honeypot, and a simple turing test.
+        // Should also look into IP throttling, send one email twice a month
         //@ts-ignore
         await db.insert(Contact).values(submission);
+        await sendMail(submission);
     } catch (error) {
         if (error instanceof Error) {
             console.error(error.message);
@@ -33,13 +36,21 @@ if (Astro.request.method === "POST") {
     <form method="POST">
         <label>
             Name:
-            <input type="text" name="name" placeholder="Bobby John" required />
+            <input
+                type="text"
+                name="name"
+                placeholder="Bobby John"
+                maxlength="50"
+                required
+            />
         </label>
         <label>
+            <!-- RFC 5321, email address max length is 320 characters -->
             Email:
             <input
                 type="email"
                 name="email"
+                maxlength="320"
                 placeholder="bobbyjohn@email.com"
                 required
             />
