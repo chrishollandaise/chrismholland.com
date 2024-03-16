@@ -21,8 +21,8 @@ if (Astro.request.method === "POST") {
         // TODO: add a honeypot, and a simple turing test.
         // Should also look into IP throttling, send one email twice a month
         //@ts-ignore
-        await db.insert(Contact).values(submission);
-        await sendMail(submission);
+        // await db.insert(Contact).values(submission);
+        // await sendMail(submission);
     } catch (error) {
         if (error instanceof Error) {
             console.error(error.message);

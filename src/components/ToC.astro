@@ -1,0 +1,21 @@
+---
+const { headings } = Astro.props;
+---
+
+<aside class="bg-gray-300 inline-block">
+    <p class="text-lg">Table of Contents</p>
+    <ul role="list" class="list-disc pl-10">
+        {
+            headings.map((heading: any) => {
+                return (
+                    // This doesn't really support more than a single depth, but I'll add it when I need it
+                    <li
+                        style={`margin-left: ${Math.min(Math.abs(2 - heading.depth), 2)}rem`}
+                    >
+                        <a href={`#${heading.slug}`}>{heading.text}</a>
+                    </li>
+                );
+            })
+        }
+    </ul>
+</aside>

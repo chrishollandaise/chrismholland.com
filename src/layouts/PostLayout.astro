@@ -1,7 +1,8 @@
 ---
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 import BaseLayout from "./BaseLayout.astro";
 import Image from "astro/components/Image.astro";
+import TableOfContents from "../components/ToC.astro";
 ---
 
 <BaseLayout>
@@ -33,6 +34,8 @@ import Image from "astro/components/Image.astro";
             ))
         }
     </ul>
-
-    <slot />
+    <TableOfContents headings={headings} />
+    <div class="prose">
+        <slot />
+    </div>
 </BaseLayout>
