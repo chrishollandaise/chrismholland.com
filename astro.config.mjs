@@ -3,8 +3,6 @@ import db from "@astrojs/db";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
-
 import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
@@ -15,6 +13,6 @@ export default defineConfig({
     defaultLocale: "en",
     locales: ["en"]
   },
-  integrations: [db(), sitemap(), expressiveCode(), mdx(), tailwind()],
+  integrations: [db(), sitemap(), expressiveCode(), mdx()],
   adapter: cloudflare()
 });

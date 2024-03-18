@@ -2,13 +2,27 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactMe from "../components/ContactMe.astro";
 import { getCollection } from "astro:content";
-
+import { Image } from "astro:assets";
+import Avatar from "../assets/me.png";
 const allPosts = await getCollection("blog");
 ---
 
 <BaseLayout>
-	<h2>Welcome!</h2>
-	<p>Here's a description about what this page is about</p>
+	<section style="display: flex;">
+		<div></div>
+		<div>
+			<h2>About Me</h2>
+			<p>
+				I am a lifelong learner who loves coaxing computers into solving
+				real-world headaches. I live for crafting simple yet impactful
+				tech.
+			</p>
+			<p>
+				On the side, I learn new languages, write, and try to touch some
+				grass.
+			</p>
+		</div>
+	</section>
 	<section>
 		<h2>Latest Posts</h2>
 		{
@@ -47,7 +61,7 @@ const allPosts = await getCollection("blog");
 		}
 	</section>
 	<section>
-		<h2>Highlighted Projects</h2>
+		<h2>Noteworthy Projects</h2>
 		{
 			allPosts
 				.filter((post) => post.data.tags.includes("project"))

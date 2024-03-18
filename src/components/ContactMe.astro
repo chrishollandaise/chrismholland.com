@@ -31,7 +31,7 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<section>
+<section id="contact-me">
     <h2>Contact Me</h2>
     <form method="POST">
         <label>
@@ -60,6 +60,7 @@ if (Astro.request.method === "POST") {
             <textarea name="message" cols="50" maxlength="1250" required
             ></textarea>
         </label>
+        <br />
         <button>Submit</button>
     </form>
 </section>

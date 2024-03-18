@@ -13,7 +13,7 @@ const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
     Tags:
     {
         uniqueTags.map((tag) => {
-            return <a href={`/tags/${tag}`}>{tag} </a>;
+            return <a href={`/tags/${tag}`}>{<code>{tag}</code>} </a>;
         })
     }
     {

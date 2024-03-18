@@ -2,14 +2,11 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Head from "../components/Head.astro";
-import "../styles/tailwind.css";
 ---
 
 <html lang="en">
     <Head title="Chris Holland's Personal Website" />
-    <body
-        class="mx-auto 2xl:max-w-screen-xl sm:max-w-[90%] flex flex-col min-h-screen h-auto"
-    >
+    <body>
         <Header />
         <main data-pagefind-body>
             <slot />

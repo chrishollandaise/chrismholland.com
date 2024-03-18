@@ -2,9 +2,9 @@
 const { headings } = Astro.props;
 ---
 
-<aside class="bg-gray-300 inline-block">
-    <p class="text-lg">Table of Contents</p>
-    <ul role="list" class="list-disc pl-10">
+<article id="toc">
+    <p>Table of Contents</p>
+    <ul role="list">
         {
             headings.map((heading: any) => {
                 return (
@@ -18,4 +18,4 @@ const { headings } = Astro.props;
             })
         }
     </ul>
-</aside>
+</article>
