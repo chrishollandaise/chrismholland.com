@@ -1,5 +1,4 @@
 ---
-import type { MarkdownContent } from "astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
@@ -27,15 +26,24 @@ export const prerender = true;
 ---
 
 <BaseLayout>
-    <p>Posts with tag: <code>{tag}</code></p>
-    <ul>
+    <h2>Blog</h2>
+    <a href="/blog">Go back</a>
+    <article style="text-align: center;">
+        <h3>Tag:</h3><code>{tag}</code>
+    </article>
+    <ul class="article" style="list-style: none;">
         {
             //@ts-ignore
-            posts?.map((post: MarkdownContent) => (
-                <li>
-                    <a href={`http://localhost:4321/blog/${post.slug}`}>
-                        {post.data.title}
-                    </a>
+            posts.map((post) => (
+                <li style="display: flex; justify-content: space-between;">
+                    <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                    <span style="text-align: end;">
+                        {post.data.pubDate.toLocaleDateString("en", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                        })}
+                    </span>
                 </li>
             ))
         }

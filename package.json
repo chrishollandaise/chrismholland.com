@@ -17,9 +17,12 @@
     "@astrojs/mdx": "^2.2.0",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.1",
+    "@iconify-json/carbon": "^1.1.31",
+    "@iconify-json/fa6-solid": "^1.1.20",
     "@types/nodemailer": "^6.4.14",
     "astro": "^4.5.1",
     "astro-expressive-code": "^0.33.5",
+    "astro-icon": "^1.1.0",
     "cowsay": "^1.6.0",
     "nodemailer": "^6.9.12",
     "typescript": "^5.4.2"

@@ -1,0 +1,46 @@
+---
+const { articles, head, includeProjectTag = true } = Astro.props;
+---
+
+<table>
+    <thead>
+        {
+            head ? (
+                head.map((label: string[]) => {
+                    return <th>{label}</th>;
+                })
+            ) : (
+                <>
+                    <th>Date</th>
+                    <th>Article</th>
+                    <th>Tags</th>
+                </>
+            )
+        }
+    </thead>
+    <tbody>
+        {
+            articles.map((post: any) => (
+                <tr>
+                    <td>
+                        {new Date(post.data.pubDate).toLocaleDateString(
+                            "en-US",
+                        )}
+                    </td>
+                    <td>
+                        <a href={`blog/${post.slug}`}>{post.data.title}</a>
+                    </td>
+                    <td>
+                        {post.data.tags.map((tag: any) => (
+                            <a href={`/tags/${tag}`}>
+                                {includeProjectTag || tag !== "project" ? (
+                                    <code>{tag}</code>
+                                ) : null}
+                            </a>
+                        ))}
+                    </td>
+                </tr>
+            ))
+        }
+    </tbody>
+</table>

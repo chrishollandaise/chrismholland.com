@@ -4,91 +4,58 @@ import ContactMe from "../components/ContactMe.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import Avatar from "../assets/me.png";
-const allPosts = await getCollection("blog");
+const latestArticles = await getCollection("blog", ({ data }) => {
+	return !data.tags.includes("project");
+});
+const projects = await getCollection("blog", ({ data }) => {
+	return data.tags.includes("project");
+});
+import ArticleTable from "../components/ArticleTable.astro";
 ---
 
 <BaseLayout>
-	<section style="display: flex;">
-		<div></div>
-		<div>
-			<h2>About Me</h2>
-			<p>
-				I am a lifelong learner who loves coaxing computers into solving
-				real-world headaches. I live for crafting simple yet impactful
-				tech.
-			</p>
-			<p>
-				On the side, I learn new languages, write, and try to touch some
-				grass.
-			</p>
+	<h1>Chris Holland</h1>
+	<section>
+		<h2>Software Engineer - Seattle, WA</h2>
+		<div class="article" style="display: flex; align-items: center;">
+			<Image
+				src={Avatar}
+				alt="Pixelated avatar of me"
+				width="128"
+				format="avif"
+				quality={50}
+			/>
+			<div>
+				<p>
+					I am a lifelong learner who loves coaxing computers into
+					solving real-world headaches. I live for crafting simple yet
+					impactful tech.
+				</p>
+				<p>
+					On the side, I learn new languages, write, and try to touch
+					some grass.
+				</p>
+			</div>
 		</div>
 	</section>
 	<section>
 		<h2>Latest Posts</h2>
-		{
-			(
-				<table>
-					<thead>
-						<th>Date</th>
-						<th>Article</th>
-						<th>Tags</th>
-					</thead>
-					<tbody>
-						{allPosts.map((post) => (
-							<tr>
-								<td>
-									<a href={`blog/${post.slug}`}>
-										{new Date(
-											post.data.pubDate,
-										).toLocaleDateString("en-US")}
-									</a>
-								</td>
-								<td>
-									<a href={`blog/${post.slug}`}>
-										{post.data.title}
-									</a>
-								</td>
-								<td>
-									<a href={`blog/${post.slug}`}>
-										{post.data.tags.join(", ")}
-									</a>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			)
-		}
+		<ArticleTable articles={latestArticles} />
 	</section>
 	<section>
 		<h2>Noteworthy Projects</h2>
-		{
-			allPosts
-				.filter((post) => post.data.tags.includes("project"))
-				.map((post) => {
-					return (
-						<tr>
-							<td>
-								<a href={`blog/${post.slug}`}>
-									{new Date(
-										post.data.pubDate,
-									).toLocaleDateString("en-US")}
-								</a>
-							</td>
-							<td>
-								<a href={`blog/${post.slug}`}>
-									{post.data.title}
-								</a>
-							</td>
-							<td>
-								<a href={`blog/${post.slug}`}>
-									{post.data.tags.join(", ")}
-								</a>
-							</td>
-						</tr>
-					);
-				})
-		}
+		<ArticleTable
+			articles={projects}
+			head={["Date", "Project", "Technologies"]}
+			includeProjectTag={false}
+		/>
+	</section>
+	<section>
+		<h2>Quick Links</h2>
+		<ul>
+			<li><a href="/">dot config</a></li>
+			<li><a href="/">vim bindings</a></li>
+		</ul>
 	</section>
 	<ContactMe />
 </BaseLayout>

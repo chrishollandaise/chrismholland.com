@@ -5,6 +5,8 @@ import expressiveCode from "astro-expressive-code";
 import mdx from "@astrojs/mdx";
 import cloudflare from "@astrojs/cloudflare";
 
+import icon from "astro-icon";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://chrismholland.com",
@@ -13,6 +15,12 @@ export default defineConfig({
     defaultLocale: "en",
     locales: ["en"]
   },
-  integrations: [db(), sitemap(), expressiveCode(), mdx()],
+  integrations: [db(), sitemap(), expressiveCode(), mdx(), icon(
+    {
+      include: {
+        "carbon": ["terminal", "keyboard"]
+      }
+    }
+  )],
   adapter: cloudflare()
 });

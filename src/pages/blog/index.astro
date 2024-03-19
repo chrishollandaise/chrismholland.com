@@ -10,17 +10,28 @@ const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 <BaseLayout>
     <h2>Blog</h2>
 
-    Tags:
-    {
-        uniqueTags.map((tag) => {
-            return <a href={`/tags/${tag}`}>{<code>{tag}</code>} </a>;
-        })
-    }
-    {
-        allPosts.map((post) => (
-            <li>
-                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-            </li>
-        ))
-    }
+    <article style="text-align: center;">
+        <h3>Tags:</h3>
+        {
+            uniqueTags.map((tag) => {
+                return <a href={`/tags/${tag}`}>{<code>{tag}</code>} </a>;
+            })
+        }
+    </article>
+    <ul class="article" style="list-style: none;">
+        {
+            allPosts.map((post) => (
+                <li style="display: flex; justify-content: space-between;">
+                    <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                    <span style="text-align: end;">
+                        {post.data.pubDate.toLocaleDateString("en", {
+                            month: "short",
+                            day: "numeric",
+                            year: "numeric",
+                        })}
+                    </span>
+                </li>
+            ))
+        }
+    </ul>
 </BaseLayout>

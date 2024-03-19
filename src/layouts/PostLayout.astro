@@ -5,7 +5,9 @@ import TableOfContents from "../components/ToC.astro";
 ---
 
 <BaseLayout>
-    <h1 data-pagefind-meta="title">{frontmatter.title}</h1>
+    <h1 data-pagefind-meta="title">
+        {frontmatter.title}
+    </h1>
     <p>{frontmatter.description}</p>
     {
         !frontmatter.draft ? (
@@ -25,4 +27,20 @@ import TableOfContents from "../components/ToC.astro";
     </ul>
     <TableOfContents headings={headings} />
     <slot />
+    <script
+        src="https://giscus.app/client.js"
+        data-repo="chrishollandaise/personal-website"
+        data-repo-id="R_kgDOGkkVAQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOGkkVAc4CeFW-"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async></script>
 </BaseLayout>

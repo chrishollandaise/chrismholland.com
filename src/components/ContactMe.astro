@@ -5,11 +5,17 @@
 if (Astro.request.method === "POST") {
     try {
         const data = await Astro.request.formData();
+
+        const honeypot = data.get("phone");
         const name = data.get("name");
         const email = data.get("email");
         const message = data.get("message");
         const dateSent = new Date();
         const clientIP = Astro.clientAddress;
+
+        if (honeypot) {
+            return;
+        }
 
         const submission = {
             name,
@@ -39,7 +45,7 @@ if (Astro.request.method === "POST") {
             <input
                 type="text"
                 name="name"
-                placeholder="Bobby John"
+                placeholder="T-800"
                 maxlength="50"
                 required
             />
@@ -51,16 +57,28 @@ if (Astro.request.method === "POST") {
                 type="email"
                 name="email"
                 maxlength="320"
-                placeholder="bobbyjohn@email.com"
+                placeholder="terminate@skynet.com"
                 required
             />
         </label>
-        <label>
-            Message:
-            <textarea name="message" cols="50" maxlength="1250" required
-            ></textarea>
+        <label class="hmm">
+            Phone Number <input
+                name="phone"
+                type="tel"
+                placeholder="555-2368"
+                pattern="[+]{1}[0-9]{11,14}"
+            />
         </label>
-        <br />
-        <button>Submit</button>
     </form>
+    <label>
+        Message:
+        <textarea
+            name="message"
+            cols="50"
+            maxlength="1250"
+            placeholder="You are terminated."
+            required></textarea>
+    </label>
+    <br />
+    <button>Submit</button>
 </section>
