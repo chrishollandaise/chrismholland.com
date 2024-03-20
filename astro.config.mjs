@@ -4,8 +4,9 @@ import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import mdx from "@astrojs/mdx";
 import cloudflare from "@astrojs/cloudflare";
-
 import icon from "astro-icon";
+
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,12 +16,10 @@ export default defineConfig({
     defaultLocale: "en",
     locales: ["en"]
   },
-  integrations: [db(), sitemap(), expressiveCode(), mdx(), icon(
-    {
-      include: {
-        "carbon": ["terminal", "keyboard"]
-      }
+  integrations: [db(), sitemap(), expressiveCode(), mdx(), icon({
+    include: {
+      "carbon": ["terminal", "keyboard"]
     }
-  )],
+  }), tailwind()],
   adapter: cloudflare()
 });

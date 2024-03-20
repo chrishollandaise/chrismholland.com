@@ -2,19 +2,44 @@
 const { frontmatter, headings } = Astro.props;
 import BaseLayout from "./BaseLayout.astro";
 import TableOfContents from "../components/ToC.astro";
+import { Image } from "astro:assets";
+import DraftTag from "../components/DraftTag.astro";
 ---
 
 <BaseLayout>
-    <h1 data-pagefind-meta="title">
+    <Image
+        style={"border-radius: 1rem; object-fit: cover; margin-bottom: 3rem"}
+        src={frontmatter.image.url}
+        alt={frontmatter.image.alt}
+        decoding="async"
+        loading="lazy"
+        inferSize
+    />
+    <p><a href="/blog">Go back</a></p>
+    <div style="display: flex; gap: 0.25em">
+        {
+            frontmatter.draft ? (
+                <small>
+                    <DraftTag isDraft={frontmatter.draft} />
+                </small>
+            ) : null
+        }
+
+        <small
+            >{
+                new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                })
+            }</small
+        >
+    </div>
+    <h1 style="margin: 0.0rem 0rem 0.0rem" data-pagefind-meta="title">
         {frontmatter.title}
     </h1>
-    <p>{frontmatter.description}</p>
-    {
-        !frontmatter.draft ? (
-            <p>{new Date(frontmatter.pubDate).toLocaleDateString("en-US")}</p>
-        ) : null
-    }
-    <ul>
+    <ul style="list-style: none; display: flex; gap: 0.5rem; padding-left: 0;">
+        <span>Tags: </span>
         {
             frontmatter.tags.map((tag: string) => (
                 <li>
@@ -25,7 +50,10 @@ import TableOfContents from "../components/ToC.astro";
             ))
         }
     </ul>
-    <TableOfContents headings={headings} />
+    <p>{frontmatter.description}</p>
+
+    {headings.length > 3 ? <TableOfContents headings={headings} /> : null}
+
     <slot />
     <script
         src="https://giscus.app/client.js"

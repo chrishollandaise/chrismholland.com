@@ -4,13 +4,24 @@ import ContactMe from "../components/ContactMe.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import Avatar from "../assets/me.png";
+import ArticleTable from "../components/ArticleTable.astro";
+import SocialStack from "../components/SocialStack.astro";
+
 const latestArticles = await getCollection("blog", ({ data }) => {
 	return !data.tags.includes("project");
 });
+
+latestArticles.sort((a, b) => {
+	return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+});
+
 const projects = await getCollection("blog", ({ data }) => {
 	return data.tags.includes("project");
 });
-import ArticleTable from "../components/ArticleTable.astro";
+
+projects.sort((a, b) => {
+	return a.data.title > b.data.title ? 1 : -1;
+});
 ---
 
 <BaseLayout>
@@ -35,12 +46,14 @@ import ArticleTable from "../components/ArticleTable.astro";
 					On the side, I learn new languages, write, and try to touch
 					some grass.
 				</p>
+				<p style="font-weight:bold;">Follow me on:</p>
+				<SocialStack />
 			</div>
 		</div>
 	</section>
 	<section>
 		<h2>Latest Posts</h2>
-		<ArticleTable articles={latestArticles} />
+		<ArticleTable articles={latestArticles.splice(0, 5)} />
 	</section>
 	<section>
 		<h2>Noteworthy Projects</h2>

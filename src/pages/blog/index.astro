@@ -1,10 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import DraftTag from "../../components/DraftTag.astro";
 
 const allPosts = await getCollection("blog");
 
 const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
+allPosts.sort((a, b) => {
+    return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+});
 ---
 
 <BaseLayout>
@@ -22,7 +27,10 @@ const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
         {
             allPosts.map((post) => (
                 <li style="display: flex; justify-content: space-between;">
-                    <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                    <a href={`/blog/${post.slug}`}>
+                        {post.data.title} <DraftTag isDraft={post.data.draft} />
+                    </a>
+
                     <span style="text-align: end;">
                         {post.data.pubDate.toLocaleDateString("en", {
                             month: "short",

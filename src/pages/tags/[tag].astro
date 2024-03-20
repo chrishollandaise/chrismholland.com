@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import DraftTag from "../../components/DraftTag.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths(): Promise<any> {
@@ -13,6 +14,10 @@ export async function getStaticPaths(): Promise<any> {
         const filteredPosts = allPosts.filter((post) =>
             post.data.tags.includes(tag),
         );
+
+        filteredPosts.sort((a, b) => {
+            return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+        });
         return {
             params: { tag },
             props: { posts: filteredPosts },
@@ -36,7 +41,10 @@ export const prerender = true;
             //@ts-ignore
             posts.map((post) => (
                 <li style="display: flex; justify-content: space-between;">
-                    <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                    <a href={`/blog/${post.slug}`}>
+                        {post.data.title}
+                        <DraftTag isDraft={post.data.draft} />
+                    </a>
                     <span style="text-align: end;">
                         {post.data.pubDate.toLocaleDateString("en", {
                             month: "short",

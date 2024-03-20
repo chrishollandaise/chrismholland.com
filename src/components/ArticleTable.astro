@@ -1,5 +1,6 @@
 ---
-const { articles, head, includeProjectTag = true } = Astro.props;
+const { articles, head, includeProjectTag = true, limit = -1 } = Astro.props;
+import DraftTag from "../components/DraftTag.astro";
 ---
 
 <table>
@@ -28,8 +29,11 @@ const { articles, head, includeProjectTag = true } = Astro.props;
                         )}
                     </td>
                     <td>
-                        <a href={`blog/${post.slug}`}>{post.data.title}</a>
-                    </td>
+                        <a href={`blog/${post.slug}`}>
+                            {post.data.title}{" "}
+                            <DraftTag isDraft={post.data.draft} />
+                        </a>
+                    </td> 
                     <td>
                         {post.data.tags.map((tag: any) => (
                             <a href={`/tags/${tag}`}>

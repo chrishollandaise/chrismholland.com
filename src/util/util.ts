@@ -1,4 +1,5 @@
 import type { MarkdownInstance } from "astro"
+import { AstroJSX } from "astro/jsx-runtime";
 
 export const filterDrafts = (posts: Array<MarkdownInstance<Record<string, any>>>): Array<MarkdownInstance<Record<string, any>>> => {
     if (!import.meta.env.DEV) {
@@ -9,3 +10,4 @@ export const filterDrafts = (posts: Array<MarkdownInstance<Record<string, any>>>
 }
 
 export const toTitleCase = (str: string) => str.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+

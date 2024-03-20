@@ -1,0 +1,30 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="mt-5">
+    <a href="https://twitter.com/chrishollando"
+        ><Icon class="icon-social" name="mdi:twitter" /></a
+    >
+    <a href="https://github.com/chrishollandaise"
+        ><Icon class="icon-social" name="mdi:github" /></a
+    >
+    <a href="https://www.linkedin.com/in/chmholland/"
+        ><Icon class="icon-social" name="mdi:linkedin" /></a
+    >
+    <a href="https://discord.com/users/176835291573780480"
+        ><Icon class="icon-social" name="mdi:discord" /></a
+    >
+</div>
+
+<style>
+    [data-icon] {
+        font-size: 1.5rem;
+        color: white;
+        transition: color 0.4s ease-out;
+    }
+
+    [data-icon]:hover {
+        color: #e3bc5e;
+    }
+</style>
