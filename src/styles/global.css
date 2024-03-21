@@ -1,61 +1,77 @@
-html {
-    scroll-behavior: smooth;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-footer {
-    text-align: center;
-}
+@layer base {
+  :root {
+    --nav-total-margin: 24px;
+    --nav-line-height: 27.2px;
+  }
 
-[id] {
-    scroll-margin-top: 4rem;
+  a {
+    @apply leading-[27.2px];
+  }
+
+  body nav:first-of-type a {
+    @apply m-[12px] inline-block;
+  }
+
+  [id] {
+    @apply scroll-mt-[calc(24px+27.2px)];
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 #toc {
-    border: 1px solid var(--links);
-    padding: 20px;
-    margin: .83em 0;
-    border-radius: .4em;
-
+  border: 1px solid var(--links);
+  padding: 20px;
+  margin: 0.83em 0;
+  border-radius: 0.4em;
 }
 
 #toc ul {
-    list-style-type: lower-roman;
+  list-style-type: lower-roman;
 }
 
 #toc ul li a {
-    text-decoration: none;
-    transition: color 0.3s ease;
-    color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  color: white;
 }
 
 #toc ul li a:hover {
-    color: var(--links);
-    text-decoration: underline;
+  color: var(--links);
+  text-decoration: underline;
 }
 
 .noselect {
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    -webkit-user-select: none;
-    /* Safari */
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    -moz-user-select: none;
-    /* Old versions of Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 .article {
-    border: 1px solid var(--border);
-    padding: 20px;
-    margin: 10px 0;
-    border-radius: 0.4em;
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 0.4em;
 }
 
 /* honeypot */
 .hmm {
-    display: none
+  display: none;
 }

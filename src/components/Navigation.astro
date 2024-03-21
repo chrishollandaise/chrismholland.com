@@ -1,24 +1,60 @@
 ---
-
+import { Icon } from 'astro-icon/components'
 ---
 
-<nav>
-    <ul>
-        <li>
-            <a href="/">[chris holland]</a>
-        </li>
-        <li>
-            <a href="/blog">writings</a>
-        </li>
-        <li>
-            <a href="/tags/project">projects</a>
-        </li>
-        <li>
-            <a href="/Holland_Chris_Resume.pdf">resume</a>
-        </li>
-        <li>
-            <a href="/#contact-me">contact</a>
-        </li>
-    </ul>
-    <!-- <div id="search"></div> -->
+<nav class='xs:flex-col'>
+  <div class='xs:flex xs:w-full xs:items-center'>
+    <a class='xs:mr-auto' href='/'>[chris holland]</a>
+    <!-- <button class="hidden xs:block twp border-0">
+            <Icon class="hidden xs:inline m-3 text-2xl" name="mdi:magnify" />
+        </button> -->
+    <button id='menu-btn' class='twp hidden border-0 xs:block'>
+      <Icon
+        class='m-3 hidden text-2xl xs:block'
+        name='mdi:hamburger-menu'
+        id='menu-burger'
+      />
+      <Icon id='close' class='m-3 hidden text-2xl xs:hidden' name='mdi:close' />
+    </button>
+  </div>
+
+  <ul id='menu' class='flex flex-row xs:mx-auto xs:hidden xs:flex-col'>
+    <li>
+      <a href='/blog'>writings</a>
+    </li>
+    <li>
+      <a href='/tags/project'>projects</a>
+    </li>
+    <li>
+      <a href='/Holland_Chris_Resume.pdf'>resume</a>
+    </li>
+    <li>
+      <a href='/#contact-me'>contact</a>
+    </li>
+  </ul>
+
+  <!-- <div id="search"></div> -->
 </nav>
+
+<script>
+  const menu: Element | null = document.querySelector('#menu')
+  const closeIcon: Element | null = document.querySelector('#close')
+  const menuBurgerIcon: Element | null = document.querySelector('#menu-burger')
+  const menuButton: Element | null = document.querySelector('#menu-btn')
+
+  menuButton?.addEventListener('click', (e: Event) => {
+    if (menu?.classList.contains('xs:hidden')) {
+      // Reveal mobile menu
+      menu.classList.replace('xs:hidden', 'xs:flex')
+      // Show close button
+      closeIcon?.classList.replace('xs:hidden', 'xs:block')
+      menuBurgerIcon?.classList.add('xs:block', 'xs:hidden')
+    } else {
+      // Hide mobile menu
+      menu?.classList.replace('xs:flex', 'xs:hidden')
+      // Show close button
+      closeIcon?.classList.replace('xs:block', 'xs:hidden')
+      menuBurgerIcon?.classList.replace('xs:hidden', 'xs:block')
+    }
+  })
+</script>

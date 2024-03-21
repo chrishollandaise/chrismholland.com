@@ -1,21 +1,21 @@
 ---
-const { headings } = Astro.props;
+const { headings } = Astro.props
 ---
 
-<article id="toc">
-    <p>Table of Contents</p>
-    <ul role="list">
-        {
-            headings.map((heading: any) => {
-                return (
-                    // This doesn't really support more than a single depth, but I'll add it when I need it
-                    <li
-                        style={`margin-left: ${Math.min(Math.abs(2 - heading.depth), 2)}rem`}
-                    >
-                        <a href={`#${heading.slug}`}>{heading.text}</a>
-                    </li>
-                );
-            })
-        }
-    </ul>
+<article id='toc'>
+  <p>Table of Contents</p>
+  <ul role='list'>
+    {
+      headings.map((heading: any) => {
+        return (
+          // This doesn't really support more than a single depth, but I'll add it when I need it
+          <li
+            style={`margin-left: ${Math.min(Math.abs(2 - heading.depth), 2)}rem`}
+          >
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        )
+      })
+    }
+  </ul>
 </article>

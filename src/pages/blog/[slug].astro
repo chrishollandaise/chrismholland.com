@@ -1,27 +1,27 @@
 ---
-import { getEntry } from "astro:content";
-import type { GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { getEntry } from 'astro:content'
+import type { GetStaticPaths } from 'astro'
+import { getCollection } from 'astro:content'
 
 export const getStaticPaths = (async () => {
-    const posts = await getCollection("blog");
+  const posts = await getCollection('blog')
 
-    return posts.map((post) => ({
-        params: {
-            slug: post.slug,
-        },
-        props: {
-            post,
-        },
-    }));
-}) satisfies GetStaticPaths;
+  return posts.map((post) => ({
+    params: {
+      slug: post.slug
+    },
+    props: {
+      post
+    }
+  }))
+}) satisfies GetStaticPaths
 
-const { post } = Astro.props;
+const { post } = Astro.props
 
-const entry = await getEntry("blog", post.slug);
-const { Content } = await entry.render();
+const entry = await getEntry('blog', post.slug)
+const { Content } = await entry.render()
 
-export const prerender = true;
+export const prerender = true
 ---
 
 <Content />

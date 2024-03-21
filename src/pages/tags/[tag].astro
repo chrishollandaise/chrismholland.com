@@ -1,59 +1,57 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import DraftTag from "../../components/DraftTag.astro";
-import { getCollection } from "astro:content";
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import DraftTag from '../../components/DraftTag.astro'
+import { getCollection } from 'astro:content'
 
 export async function getStaticPaths(): Promise<any> {
-    const allPosts = await getCollection("blog");
+  const allPosts = await getCollection('blog')
 
-    const uniqueTags = [
-        ...new Set(allPosts.map((post) => post.data.tags).flat()),
-    ];
+  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
 
-    return uniqueTags.map((tag) => {
-        const filteredPosts = allPosts.filter((post) =>
-            post.data.tags.includes(tag),
-        );
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag)
+    )
 
-        filteredPosts.sort((a, b) => {
-            return b.data.pubDate.getTime() - a.data.pubDate.getTime();
-        });
-        return {
-            params: { tag },
-            props: { posts: filteredPosts },
-        };
-    });
+    filteredPosts.sort((a, b) => {
+      return b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    })
+    return {
+      params: { tag },
+      props: { posts: filteredPosts }
+    }
+  })
 }
 
-const { tag } = Astro.params;
-const { posts } = Astro.props;
-export const prerender = true;
+const { tag } = Astro.params
+const { posts } = Astro.props
+export const prerender = true
 ---
 
 <BaseLayout>
-    <h2>Blog</h2>
-    <a href="/blog">Go back</a>
-    <article style="text-align: center;">
-        <h3>Tag:</h3><code>{tag}</code>
-    </article>
-    <ul class="article" style="list-style: none;">
-        {
-            //@ts-ignore
-            posts.map((post) => (
-                <li style="display: flex; justify-content: space-between;">
-                    <a href={`/blog/${post.slug}`}>
-                        {post.data.title}
-                        <DraftTag isDraft={post.data.draft} />
-                    </a>
-                    <span style="text-align: end;">
-                        {post.data.pubDate.toLocaleDateString("en", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                        })}
-                    </span>
-                </li>
-            ))
-        }
-    </ul>
+  <h2>Blog</h2>
+  <a href='/blog'>Go back</a>
+  <article style='text-align: center;'>
+    <h3>Tag:</h3><code>{tag}</code>
+  </article>
+  <ul class='article' style='list-style: none;'>
+    {
+      //@ts-ignore
+      posts.map((post) => (
+        <li style='display: flex; justify-content: space-between;'>
+          <a href={`/blog/${post.slug}`}>
+            {post.data.title}
+            <DraftTag isDraft={post.data.draft} />
+          </a>
+          <span style='text-align: end;'>
+            {post.data.pubDate.toLocaleDateString('en', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+            })}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>

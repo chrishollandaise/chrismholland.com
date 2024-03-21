@@ -1,17 +1,15 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { say } from "cowsay";
-import quotes from "../assets/cowsay.json";
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { say } from 'cowsay'
+import quotes from '../assets/cowsay.json'
 ---
 
 <BaseLayout>
-    <figure>
-        <pre
-            class="noselect"
-            aria-hidden="true">{say({ text: quotes[Math.floor(Math.random() * quotes.length)].quote, f: "stegosaurus", d: true})}
+  <figure>
+    <pre
+      class='noselect'
+      aria-hidden='true'>{say({ text: quotes[Math.floor(Math.random() * quotes.length)].quote, f: "stegosaurus", d: true})}
     </pre>
-        <figcaption style="text-align: center;">
-            404. Page Not Found.
-        </figcaption>
-    </figure>
+    <figcaption style='text-align: center;'>404. Page Not Found.</figcaption>
+  </figure>
 </BaseLayout>

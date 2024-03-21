@@ -2,8 +2,7 @@
 Astro provides no way of rendering astro components as raw html strings :(
 */
 export default function createEmailTemplate(submission: any) {
-    return (
-        `
+  return `
         <!doctype html>
 <html lang="en">
     <head>
@@ -229,8 +228,7 @@ export default function createEmailTemplate(submission: any) {
                                         <span
                                             class="apple-link"
                                             style="color: #9a9ea6; font-size: 16px; text-align: center;"
-                                            >Message sent from <a href="https://whatismyipaddress.com/ip/${submission.metadata.ip}">${submission.metadata.ip
-        }</a>
+                                            >Message sent from <a href="https://whatismyipaddress.com/ip/${submission.metadata.ip}">${submission.metadata.ip}</a>
                                         </span>
                                         <br /> Sender email address: <a
                                             href="mailto:${submission.email}"
@@ -269,5 +267,4 @@ export default function createEmailTemplate(submission: any) {
     </body>
 </html>
         `
-    )
 }

@@ -1,27 +1,27 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import Head from "../components/Head.astro";
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Head from '../components/Head.astro'
 ---
 
-<html lang="en">
-    <Head title="Chris Holland" />
-    <body>
-        <Header />
-        <main data-pagefind-body>
-            <slot />
-        </main>
-        <Footer />
-        <script>
-            window.addEventListener("DOMContentLoaded", (event) => {
-                //@ts-ignore
-                new PagefindUI({
-                    element: "#search",
-                    showSubResults: true,
-                    highlightParam: "highlight",
-                    showImages: false,
-                });
-            });
-        </script>
-    </body>
+<html class='scroll-smooth' lang='en'>
+  <Head title='Chris Holland' />
+  <body>
+    <Header />
+    <main data-pagefind-body>
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        //@ts-ignore
+        new PagefindUI({
+          element: '#search',
+          showSubResults: true,
+          highlightParam: 'highlight',
+          showImages: false
+        })
+      })
+    </script>
+  </body>
 </html>

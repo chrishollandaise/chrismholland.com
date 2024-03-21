@@ -1,74 +1,74 @@
 ---
-const { frontmatter, headings } = Astro.props;
-import BaseLayout from "./BaseLayout.astro";
-import TableOfContents from "../components/ToC.astro";
-import { Image } from "astro:assets";
-import DraftTag from "../components/DraftTag.astro";
+const { frontmatter, headings } = Astro.props
+import BaseLayout from './BaseLayout.astro'
+import TableOfContents from '../components/ToC.astro'
+import { Image } from 'astro:assets'
+import DraftTag from '../components/DraftTag.astro'
 ---
 
 <BaseLayout>
-    <Image
-        style={"border-radius: 1rem; object-fit: cover; margin-bottom: 3rem"}
-        src={frontmatter.image.url}
-        alt={frontmatter.image.alt}
-        decoding="async"
-        loading="lazy"
-        inferSize
-    />
-    <p><a href="/blog">Go back</a></p>
-    <div style="display: flex; gap: 0.25em">
-        {
-            frontmatter.draft ? (
-                <small>
-                    <DraftTag isDraft={frontmatter.draft} />
-                </small>
-            ) : null
-        }
+  <Image
+    style={'border-radius: 1rem; object-fit: cover; margin-bottom: 3rem'}
+    src={frontmatter.image.url}
+    alt={frontmatter.image.alt}
+    decoding='async'
+    loading='lazy'
+    inferSize
+  />
+  <p><a href='/blog'>Go back</a></p>
+  <div style='display: flex; gap: 0.25em'>
+    {
+      frontmatter.draft ? (
+        <small>
+          <DraftTag isDraft={frontmatter.draft} />
+        </small>
+      ) : null
+    }
 
-        <small
-            >{
-                new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                })
-            }</small
-        >
-    </div>
-    <h1 style="margin: 0.0rem 0rem 0.0rem" data-pagefind-meta="title">
-        {frontmatter.title}
-    </h1>
-    <ul style="list-style: none; display: flex; gap: 0.5rem; padding-left: 0;">
-        <span>Tags: </span>
-        {
-            frontmatter.tags.map((tag: string) => (
-                <li>
-                    <a href={`/tags/${tag}`}>
-                        <code>{tag}</code>
-                    </a>
-                </li>
-            ))
-        }
-    </ul>
-    <p>{frontmatter.description}</p>
+    <small
+      >{
+        new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        })
+      }</small
+    >
+  </div>
+  <h1 style='margin: 0.0rem 0rem 0.0rem' data-pagefind-meta='title'>
+    {frontmatter.title}
+  </h1>
+  <ul style='list-style: none; display: flex; gap: 0.5rem; padding-left: 0;'>
+    <span>Tags: </span>
+    {
+      frontmatter.tags.map((tag: string) => (
+        <li>
+          <a href={`/tags/${tag}`}>
+            <code>{tag}</code>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p>{frontmatter.description}</p>
 
-    {headings.length > 3 ? <TableOfContents headings={headings} /> : null}
+  {headings.length > 3 ? <TableOfContents headings={headings} /> : null}
 
-    <slot />
-    <script
-        src="https://giscus.app/client.js"
-        data-repo="chrishollandaise/personal-website"
-        data-repo-id="R_kgDOGkkVAQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOGkkVAc4CeFW-"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async></script>
+  <slot />
+  <script
+    src='https://giscus.app/client.js'
+    data-repo='chrishollandaise/personal-website'
+    data-repo-id='R_kgDOGkkVAQ'
+    data-category='Announcements'
+    data-category-id='DIC_kwDOGkkVAc4CeFW-'
+    data-mapping='pathname'
+    data-strict='0'
+    data-reactions-enabled='1'
+    data-emit-metadata='0'
+    data-input-position='top'
+    data-theme='preferred_color_scheme'
+    data-lang='en'
+    data-loading='lazy'
+    crossorigin='anonymous'
+    async></script>
 </BaseLayout>
