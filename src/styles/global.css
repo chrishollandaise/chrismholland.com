@@ -21,12 +21,30 @@
   }
 
   nav ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @apply flex flex-col justify-center;
   }
 }
 
+@layer components {
+  .admonition-note {
+    @apply border-yellow-600 bg-yellow-400 text-yellow-700;
+  }
+  .admonition-important {
+    @apply border-blue-600  bg-blue-400 text-blue-700;
+  }
+  .admonition-warning {
+    @apply border-red-600  bg-red-400 text-red-700;
+  }
+  .admonition-tip {
+    @apply border-green-600  bg-green-400 text-green-700;
+  }
+  .admonition-caution {
+    @apply border-orange-600  bg-orange-400 text-orange-700;
+  }
+  .admonition-custom {
+    @apply border-purple-600  bg-purple-400 text-purple-700;
+  }
+}
 #toc {
   border: 1px solid var(--links);
   padding: 20px;

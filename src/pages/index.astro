@@ -6,6 +6,7 @@ import { Image } from 'astro:assets'
 import Avatar from '../assets/me.png'
 import ArticleTable from '../components/ArticleTable.astro'
 import SocialStack from '../components/SocialStack.astro'
+import Admonition from '../components/Admonition.astro'
 
 const latestArticles = await getCollection('blog', ({ data }) => {
   return !data.tags.includes('project')
