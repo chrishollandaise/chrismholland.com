@@ -1,15 +1,5 @@
 import type { MarkdownInstance } from 'astro'
 
-export const filterDrafts = (
-  posts: Array<MarkdownInstance<Record<string, any>>>
-): Array<MarkdownInstance<Record<string, any>>> => {
-  if (!import.meta.env.DEV) {
-    return posts.filter((post) => !post.frontmatter.draft)
-  } else {
-    return posts
-  }
-}
-
 export const toTitleCase = (str: string) =>
   str.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
 
@@ -38,4 +28,8 @@ export const byTime = (a: any, b: any, desc: boolean = true): number => {
   } else {
     return a.data.pubDate.getTime() - b.data.pubDate.getTime()
   }
+}
+
+export const filterDrafts = (post: any): boolean => {
+  return import.meta.env.PROD ? (post.data.draft ? false : true) : true
 }

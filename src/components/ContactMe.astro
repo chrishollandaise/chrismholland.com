@@ -39,10 +39,11 @@ if (Astro.request.method === 'POST') {
 
 <section id='contact-me'>
   <h2>Contact Me</h2>
-  <form method='POST'>
-    <label>
+  <form method='POST' class='xs:flex xs:flex-col xs:gap-5'>
+    <label class='xs:flex xs:flex-col'>
       Name:
       <input
+        class='xs:mr-0'
         type='text'
         name='name'
         placeholder='T-800'
@@ -50,10 +51,11 @@ if (Astro.request.method === 'POST') {
         required
       />
     </label>
-    <label>
+    <label class='xs:mr-0 xs:flex xs:flex-col'>
       <!-- RFC 5321, email address max length is 320 characters -->
       Email:
       <input
+        class='xs:mr-0'
         type='email'
         name='email'
         maxlength='320'

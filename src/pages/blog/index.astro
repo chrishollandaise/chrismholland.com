@@ -2,9 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getCollection } from 'astro:content'
 import DraftTag from '../../components/DraftTag.astro'
-import { renderDate, getAllUniqueTags, byTime } from '../../util/general'
+import {
+  renderDate,
+  getAllUniqueTags,
+  byTime,
+  filterDrafts
+} from '../../util/general'
 
-const allPosts = await getCollection('blog')
+const allPosts = await getCollection('blog', (post) => filterDrafts(post))
 allPosts.sort(byTime)
 
 const uniqueTags = getAllUniqueTags(allPosts)
@@ -13,14 +18,14 @@ const uniqueTags = getAllUniqueTags(allPosts)
 <BaseLayout>
   <h2>Blog</h2>
 
-  <article class='text-center'>
+  <div class='text-center'>
     <h3>Tags:</h3>
     {
       uniqueTags.map((tag) => {
         return <a href={`/tags/${tag}`}>{<code>{tag}</code>} </a>
       })
     }
-  </article>
+  </div>
   <ul class='article' class='list-none'>
     {
       allPosts.map((post) => (

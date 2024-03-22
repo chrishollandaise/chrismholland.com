@@ -12,7 +12,7 @@ import partytown from '@astrojs/partytown'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://chrismholland.com',
-  output: 'hybrid',
+  // output: 'hybrid',
   i18n: {
     defaultLocale: 'en',
     locales: ['en']
@@ -31,7 +31,9 @@ export default defineConfig({
           'discord',
           'tags',
           'close',
-          'hamburger-menu'
+          'hamburger-menu',
+          'arrow-left-thin',
+          'magnify'
         ]
       }
     }),
@@ -44,8 +46,8 @@ export default defineConfig({
         className: ['']
       }
     }
-  },
-  adapter: cloudflare({
-    imageService: 'passthrough'
-  })
+  }
+  // adapter: cloudflare({
+  //   imageService: 'passthrough'
+  // })
 })

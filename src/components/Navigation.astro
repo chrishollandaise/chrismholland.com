@@ -1,12 +1,34 @@
 ---
 type Props = Record<string, never>
 import { Icon } from 'astro-icon/components'
+import Search from '../components/Search.astro'
 ---
 
-<nav class='xs:flex-col'>
-  <div class='xs:flex xs:w-full xs:items-center'>
-    <a class='xs:mr-auto' href='/'>[chris holland]</a>
-    <button id='menu-btn' class='twp hidden border-0 xs:block'>
+<nav class='xs:flex xs:flex-wrap xs:justify-between'>
+  <a class='block' href='/'>[chris holland]</a>
+
+  <ul
+    id='menu'
+    class='flex flex-row xs:order-last xs:hidden xs:basis-full xs:flex-col xs:text-center'
+  >
+    <!-- easier to click link since whole block is clickable -->
+    <li>
+      <a class='block' href='/blog'>writings</a>
+    </li>
+    <li>
+      <a class='block' href='/tags/project'>projects</a>
+    </li>
+    <li>
+      <a class='block' href='/Holland_Chris_Resume.pdf'>resume</a>
+    </li>
+    <li>
+      <a class='block' href='/#contact-me'>contact</a>
+    </li>
+  </ul>
+
+  <div class='ml-auto flex'>
+    <Search />
+    <button id='menu-btn' class='twp hidden border-0 xs:order-last xs:block'>
       <Icon
         class='m-3 hidden text-2xl xs:block'
         name='mdi:hamburger-menu'
@@ -15,21 +37,6 @@ import { Icon } from 'astro-icon/components'
       <Icon id='close' class='m-3 hidden text-2xl xs:hidden' name='mdi:close' />
     </button>
   </div>
-
-  <ul id='menu' class='flex flex-row xs:mx-auto xs:hidden xs:flex-col'>
-    <li>
-      <a href='/blog'>writings</a>
-    </li>
-    <li>
-      <a href='/tags/project'>projects</a>
-    </li>
-    <li>
-      <a href='/Holland_Chris_Resume.pdf'>resume</a>
-    </li>
-    <li>
-      <a href='/#contact-me'>contact</a>
-    </li>
-  </ul>
 </nav>
 
 <script>

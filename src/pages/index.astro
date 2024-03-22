@@ -6,17 +6,18 @@ import { Image } from 'astro:assets'
 import Avatar from '../assets/me.png'
 import ArticleTable from '../components/ArticleTable.astro'
 import SocialStack from '../components/SocialStack.astro'
+import { filterDrafts } from '../util/general'
 
-const latestArticles = await getCollection('blog', ({ data }) => {
-  return !data.tags.includes('project')
+const latestArticles = await getCollection('blog', (post) => {
+  return !post.data.tags.includes('project') && filterDrafts(post)
 })
 
 latestArticles.sort((a, b) => {
   return b.data.pubDate.getTime() - a.data.pubDate.getTime()
 })
 
-const projects = await getCollection('blog', ({ data }) => {
-  return data.tags.includes('project')
+const projects = await getCollection('blog', (post) => {
+  return post.data.tags.includes('project') && filterDrafts(post)
 })
 
 projects.sort((a, b) => {
@@ -25,10 +26,13 @@ projects.sort((a, b) => {
 ---
 
 <BaseLayout>
-  <h1>Chris Holland</h1>
+  <h1 class='mb-0'>Chris Holland</h1>
+  <h2 class='text-bahunya-gold mt-0 text-xl xs:text-balance'>
+    Software Engineer - Seattle, WA
+  </h2>
   <section>
-    <h2>Software Engineer - Seattle, WA</h2>
-    <div class='article flex items-center'>
+    <h2 class='sr-only'>About me</h2>
+    <div class='article flex items-center xs:flex-col xs:text-balance'>
       <Image
         src={Avatar}
         alt='Pixelated avatar of me'
@@ -36,7 +40,7 @@ projects.sort((a, b) => {
         format='avif'
         quality={50}
       />
-      <div>
+      <div class='xs:text-center'>
         <p>
           I am a lifelong learner who loves coaxing computers into solving
           real-world headaches. I live for crafting simple yet impactful tech.
@@ -46,7 +50,7 @@ projects.sort((a, b) => {
           grass.
         </p>
         <p class='font-bold'>Follow me on:</p>
-        <SocialStack />
+        <SocialStack class='xs:justify-center' />
       </div>
     </div>
   </section>

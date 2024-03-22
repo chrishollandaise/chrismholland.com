@@ -1,9 +1,12 @@
 ---
-type Props = Record<string, never>
+interface Props {
+  class?: string
+}
 import { Icon } from 'astro-icon/components'
+const { class: className } = Astro.props
 ---
 
-<div class='mt-5'>
+<div class:list={['mt-5 flex gap-3', className]}>
   <a target='_blank' href='https://twitter.com/chrishollando'
     ><Icon class='icon-social' name='mdi:twitter' /></a
   >

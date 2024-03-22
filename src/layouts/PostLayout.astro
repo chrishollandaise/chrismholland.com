@@ -7,38 +7,39 @@ const { frontmatter } = Astro.props
 import BaseLayout from './BaseLayout.astro'
 import { Icon } from 'astro-icon/components'
 import { renderDate } from '../util/general'
+import Back from '../components/BackButton.astro'
 ---
 
 <BaseLayout title={frontmatter.title}>
-  <a class='mb-5 block' href='/blog'>Go back</a>
-  <div class='flex gap-2'>
-    {}
-
-    <small>{renderDate(new Date(frontmatter.pubDate))}</small>
-  </div>
-  <h1 class='mb-0 mr-0 mt-0' data-pagefind-meta='title'>
-    {frontmatter.title}
-  </h1>
-  <ul class='flex list-none items-center gap-2 pl-0'>
-    <Icon name='mdi:tags' />
-    {
-      (() => {
-        frontmatter.tags.sort()
-        return frontmatter.tags.map((tag: string) => (
-          <li>
-            <a href={`/tags/${tag}`}>
-              <small>
-                <code>{tag}</code>
-              </small>
-            </a>
-          </li>
-        ))
-      })()
-    }
-  </ul>
-  <div>
-    <slot />
-  </div>
+  <article class='border-0' data-pagefind-body>
+    <Back href='/blog' />
+    <div class='flex gap-2'>
+      <small>{renderDate(new Date(frontmatter.pubDate))}</small>
+    </div>
+    <h1 class='mb-0 mr-0 mt-0' data-pagefind-meta='title'>
+      {frontmatter.title}
+    </h1>
+    <ul class='flex list-none items-center gap-2 pl-0'>
+      <Icon name='mdi:tags' />
+      {
+        (() => {
+          frontmatter.tags.sort()
+          return frontmatter.tags.map((tag: string) => (
+            <li>
+              <a href={`/tags/${tag}`}>
+                <small>
+                  <code>{tag}</code>
+                </small>
+              </a>
+            </li>
+          ))
+        })()
+      }
+    </ul>
+    <div>
+      <slot />
+    </div>
+  </article>
 
   <script
     is:inline

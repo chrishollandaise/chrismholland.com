@@ -17,7 +17,10 @@ import '../styles/global.css'
   <script src='/pagefind/pagefind-ui.js' is:inline></script>
   <script is:inline type='module'>
     await import('/pagefind/pagefind-highlight.js')
-    new PagefindHighlight({ highlightParam: 'highlight' })
+    new PagefindHighlight({
+      highlightParam: 'highlight',
+      markContext: '[data-pagefind-body]'
+    })
   </script>
   <!-- RSS -->
   <link

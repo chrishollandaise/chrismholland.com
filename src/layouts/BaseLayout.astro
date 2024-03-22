@@ -12,20 +12,9 @@ import Head from '../components/Head.astro'
   <Head title={title ? `${title} - Chris' Blog"` : "Chris' Blog"} />
   <body>
     <Header />
-    <main data-pagefind-body>
+    <main>
       <slot />
     </main>
     <Footer />
-    <script>
-      window.addEventListener('DOMContentLoaded', (event) => {
-        //@ts-ignore
-        new PagefindUI({
-          element: '#search',
-          showSubResults: true,
-          highlightParam: 'highlight',
-          showImages: false
-        })
-      })
-    </script>
   </body>
 </html>

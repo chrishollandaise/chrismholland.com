@@ -2,10 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import DraftTag from '../../components/DraftTag.astro'
 import { getCollection } from 'astro:content'
-import { renderDate, byTime, getAllUniqueTags } from '../../util/general'
+import {
+  renderDate,
+  byTime,
+  getAllUniqueTags,
+  filterDrafts
+} from '../../util/general'
+import BackButton from '../../components/BackButton.astro'
 
 export async function getStaticPaths(): Promise<any> {
-  const allPosts = await getCollection('blog')
+  const allPosts = await getCollection('blog', (post) => filterDrafts(post))
 
   const uniqueTags = getAllUniqueTags(allPosts)
 
@@ -29,10 +35,10 @@ export const prerender = true
 
 <BaseLayout>
   <h2>Blog</h2>
-  <a href='/blog'>Go back</a>
-  <article class='text-center'>
+  <BackButton href='/blog' />
+  <div class='text-center'>
     <h3>Tag:</h3><code>{tag}</code>
-  </article>
+  </div>
   <ul class='article list-none'>
     {
       //@ts-ignore
