@@ -1,61 +1,47 @@
 ---
-const { frontmatter, headings } = Astro.props
+import type { BlogSchema } from '../content/config'
+interface Props {
+  frontmatter: BlogSchema
+}
+const { frontmatter } = Astro.props
 import BaseLayout from './BaseLayout.astro'
-import TableOfContents from '../components/ToC.astro'
-import { Image } from 'astro:assets'
-import DraftTag from '../components/DraftTag.astro'
+import { Icon } from 'astro-icon/components'
+import { renderDate } from '../util/general'
 ---
 
-<BaseLayout>
-  <Image
-    style={'border-radius: 1rem; object-fit: cover; margin-bottom: 3rem'}
-    src={frontmatter.image.url}
-    alt={frontmatter.image.alt}
-    decoding='async'
-    loading='lazy'
-    inferSize
-  />
-  <p><a href='/blog'>Go back</a></p>
-  <div style='display: flex; gap: 0.25em'>
-    {
-      frontmatter.draft ? (
-        <small>
-          <DraftTag isDraft={frontmatter.draft} />
-        </small>
-      ) : null
-    }
+<BaseLayout title={frontmatter.title}>
+  <a class='mb-5 block' href='/blog'>Go back</a>
+  <div class='flex gap-2'>
+    {}
 
-    <small
-      >{
-        new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric'
-        })
-      }</small
-    >
+    <small>{renderDate(new Date(frontmatter.pubDate))}</small>
   </div>
-  <h1 style='margin: 0.0rem 0rem 0.0rem' data-pagefind-meta='title'>
+  <h1 class='mb-0 mr-0 mt-0' data-pagefind-meta='title'>
     {frontmatter.title}
   </h1>
-  <ul style='list-style: none; display: flex; gap: 0.5rem; padding-left: 0;'>
-    <span>Tags: </span>
+  <ul class='flex list-none items-center gap-2 pl-0'>
+    <Icon name='mdi:tags' />
     {
-      frontmatter.tags.map((tag: string) => (
-        <li>
-          <a href={`/tags/${tag}`}>
-            <code>{tag}</code>
-          </a>
-        </li>
-      ))
+      (() => {
+        frontmatter.tags.sort()
+        return frontmatter.tags.map((tag: string) => (
+          <li>
+            <a href={`/tags/${tag}`}>
+              <small>
+                <code>{tag}</code>
+              </small>
+            </a>
+          </li>
+        ))
+      })()
     }
   </ul>
-  <p>{frontmatter.description}</p>
+  <div>
+    <slot />
+  </div>
 
-  {headings.length > 3 ? <TableOfContents headings={headings} /> : null}
-
-  <slot />
   <script
+    is:inline
     src='https://giscus.app/client.js'
     data-repo='chrishollandaise/personal-website'
     data-repo-id='R_kgDOGkkVAQ'

@@ -2,20 +2,18 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getCollection } from 'astro:content'
 import DraftTag from '../../components/DraftTag.astro'
+import { renderDate, getAllUniqueTags, byTime } from '../../util/general'
 
 const allPosts = await getCollection('blog')
+allPosts.sort(byTime)
 
-const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
-
-allPosts.sort((a, b) => {
-  return b.data.pubDate.getTime() - a.data.pubDate.getTime()
-})
+const uniqueTags = getAllUniqueTags(allPosts)
 ---
 
 <BaseLayout>
   <h2>Blog</h2>
 
-  <article style='text-align: center;'>
+  <article class='text-center'>
     <h3>Tags:</h3>
     {
       uniqueTags.map((tag) => {
@@ -23,21 +21,15 @@ allPosts.sort((a, b) => {
       })
     }
   </article>
-  <ul class='article' style='list-style: none;'>
+  <ul class='article' class='list-none'>
     {
       allPosts.map((post) => (
-        <li style='display: flex; justify-content: space-between;'>
+        <li class='flex justify-between'>
           <a href={`/blog/${post.slug}`}>
             {post.data.title} <DraftTag isDraft={post.data.draft} />
           </a>
 
-          <span style='text-align: end;'>
-            {post.data.pubDate.toLocaleDateString('en', {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric'
-            })}
-          </span>
+          <span class='text-end'>{renderDate(post.data.pubDate)}</span>
         </li>
       ))
     }

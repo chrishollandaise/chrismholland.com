@@ -1,20 +1,20 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme");
-const { scopedPreflightStyles } = require("tailwindcss-scoped-preflight");
+const defaultTheme = require('tailwindcss/defaultTheme')
+const { scopedPreflightStyles } = require('tailwindcss-scoped-preflight')
 
 export default {
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   corePlugins: {
-    preflight: false,
+    preflight: false
   },
   plugins: [
     scopedPreflightStyles({
-      cssSelector: ".twp",
-    }),
+      cssSelector: '.twp'
+    })
   ],
   important: true,
   theme: {
-    screens: { xs: { max: "462px" }, ...defaultTheme.screens },
-    extend: {},
-  },
-};
+    screens: { xs: { max: '462px' }, ...defaultTheme.screens },
+    extend: {}
+  }
+}

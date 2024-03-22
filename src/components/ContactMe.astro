@@ -1,12 +1,9 @@
 ---
-import { Icon } from 'astro-icon/components'
-
 // import { db, Contact } from "astro:db";
 // import sendMail from "../util/sendMail";
 
 if (Astro.request.method === 'POST') {
   try {
-    console.log('hello')
     const data = await Astro.request.formData()
 
     const honeypot = data.get('phone')
@@ -61,6 +58,7 @@ if (Astro.request.method === 'POST') {
         name='email'
         maxlength='320'
         placeholder='terminate@skynet.com'
+        pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
         required
       />
     </label>
@@ -82,6 +80,6 @@ if (Astro.request.method === 'POST') {
         required></textarea>
     </label>
     <br />
-    <button type='submit'>Submit</button>
+    <button class='px-5 xs:w-full xs:p-3' type='submit'>Submit</button>
   </form>
 </section>

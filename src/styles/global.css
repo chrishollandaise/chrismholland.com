@@ -45,27 +45,6 @@
     @apply border-purple-600  bg-purple-400 text-purple-700;
   }
 }
-#toc {
-  border: 1px solid var(--links);
-  padding: 20px;
-  margin: 0.83em 0;
-  border-radius: 0.4em;
-}
-
-#toc ul {
-  list-style-type: lower-roman;
-}
-
-#toc ul li a {
-  text-decoration: none;
-  transition: color 0.3s ease;
-  color: white;
-}
-
-#toc ul li a:hover {
-  color: var(--links);
-  text-decoration: underline;
-}
 
 .noselect {
   -webkit-touch-callout: none;
@@ -92,4 +71,8 @@
 /* honeypot */
 .hmm {
   display: none;
+}
+
+a.data-footnote-backref {
+  font-family: sans-serif;
 }

@@ -2,17 +2,12 @@
 layout: ../../layouts/PostLayout.astro
 title: My First Article
 description: Here's a description of what this does for me.
-image:
-  url: https://docs.astro.build/default-og-image.png
-  alt: The word astro against an illustration of planets and stars.
 pubDate: 2024-03-13
 draft: false
 tags:
   - astrojs
   - successes
 ---
-
-import Admonition from '../../components/Admonition.astro'
 
 ## Nubes honore
 
@@ -173,15 +168,6 @@ angues, meis qua tu virgo, Amphionis nomen animae, tuta.
 6. Cum hanc quicquid tota quantum saepe
 
 ## Nutu defecta patiens Erectheas per tollit adsum
-
-<Admonition type='note' title='Hello world!'>
-  vobis, an Pittheus vestigia sequitur caeli; pactae manus dignus. Miseranda
-  fuissem. Fundamina melior tum potentia ingenium suoque, ipse cum revirescere
-  nullique **vox simulacraque** qui tellure; volucres est. Utque domosque,
-  maioris est secutum propago; an haec at e habet salientis passurae. In fortes
-  metiris et natales: pestis: equos, tegumenque tantummodo populos cum superi
-  tellus; _tuta_ corpus.
-</Admonition>{' '}
 
 - Fatale capit quoscumque longoque resedit humum
 - Cupido solida ut esse est victum ulnis

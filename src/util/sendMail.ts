@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import createEmailTemplate from './template/email'
-import { toTitleCase } from './util'
+import { toTitleCase } from './general'
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',

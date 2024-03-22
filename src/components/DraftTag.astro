@@ -1,5 +1,15 @@
 ---
+export interface Props {
+  isDraft: boolean
+}
+
 const { isDraft } = Astro.props
 ---
 
-{isDraft ? <code style='color: #d91e18;'>draft</code> : null}
+{
+  isDraft ? (
+    <small>
+      <code class='bg-yellow-300 text-black'>draft</code>
+    </small>
+  ) : null
+}

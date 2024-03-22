@@ -1,9 +1,10 @@
 {
-  "name": "",
+  "name": "chrismholland.com",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev --remote",
+    "dev": "astro dev",
+    "dev:remote": "astro dev --remote",
     "start": "astro dev",
     "format": "npx prettier 'src/**/*.{js,ts,mjs,cjs,json,astro,css}' --write",
     "build:pagefind": "npx pagefind --site 'dist' && cp -r dist/pagefind public/",
@@ -16,6 +17,7 @@
     "@astrojs/cloudflare": "^9.1.0",
     "@astrojs/db": "^0.8.1",
     "@astrojs/mdx": "^2.2.1",
+    "@astrojs/partytown": "^2.0.4",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.1",
     "@astrojs/tailwind": "^5.1.0",

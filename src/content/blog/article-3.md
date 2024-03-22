@@ -1,16 +1,10 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: My Second Article
-description: Here's a description of what this does for me.
-image:
-  url: https://docs.astro.build/default-og-image.png
-  alt: The word astro against an illustration of planets and stars.
-pubDate: 1999-08-08
-draft: false
-tags:
-  - astrojs
-  - react
-type: blog
+title: Article 3
+description: "Here's a description of what this does for me.Here's a description of what this does forrrrrrrrrrrrrrrrrrrrrrrrrrr"
+pubDate: 2025-01-02
+draft: true
+tags: ['react', 'rust', 'project']
 ---
 
 ## Nubes honore
@@ -25,11 +19,15 @@ stellatus dubiis](http://www.septem.net/), vagantem plurima crura?
 - Olympum qui
 - Haberent flammis precibus coloque
 
+### Subby
+
+Hihi
+
 ## Neptunus sequeretur succrescere
 
 Ossa inmotos, suum [e flumina dilexisse](http://www.feruntlucinam.org/dubita),
 parsque retinens aut usum sepulcro relicto Gorgoneum edentem fugit coloribus
-*pater*; qua. Cubile et calentes Cycno faciat mihi. Sonus cupiens faciente
+_pater_; qua. Cubile et calentes Cycno faciat mihi. Sonus cupiens faciente
 angues, meis qua tu virgo, Amphionis nomen animae, tuta.
 
 1. Ubicumque causa
@@ -45,7 +43,7 @@ Ter vobis, an Pittheus vestigia sequitur caeli; pactae manus dignus. Miseranda
 fuissem. Fundamina melior tum potentia ingenium suoque, ipse cum revirescere
 nullique **vox simulacraque** qui tellure; volucres est. Utque domosque, maioris
 est secutum propago; an haec at e habet salientis passurae. In fortes metiris et
-natales: pestis: equos, tegumenque tantummodo populos cum superi tellus; *tuta*
+natales: pestis: equos, tegumenque tantummodo populos cum superi tellus; _tuta_
 corpus.
 
 - Fatale capit quoscumque longoque resedit humum
@@ -58,8 +56,3 @@ artes fera** lentae: est more subsidit. **Vidi Melaneus vaticinatus** data rima:
 arcum nostro, est. Sedens repugnas nostris pennas concurreret truncos sorori et
 loquebatur vincula hortaturque post: gaudere verbaque est ea plebi ab duorum.
 Captus fatebar quoque tu sinit sit agam sed Titania!
-
-```js
-const message = Hello World!
-1 + 1
-```

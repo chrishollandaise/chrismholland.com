@@ -6,7 +6,6 @@ import { Image } from 'astro:assets'
 import Avatar from '../assets/me.png'
 import ArticleTable from '../components/ArticleTable.astro'
 import SocialStack from '../components/SocialStack.astro'
-import Admonition from '../components/Admonition.astro'
 
 const latestArticles = await getCollection('blog', ({ data }) => {
   return !data.tags.includes('project')
@@ -29,7 +28,7 @@ projects.sort((a, b) => {
   <h1>Chris Holland</h1>
   <section>
     <h2>Software Engineer - Seattle, WA</h2>
-    <div class='article' style='display: flex; align-items: center;'>
+    <div class='article flex items-center'>
       <Image
         src={Avatar}
         alt='Pixelated avatar of me'
@@ -46,7 +45,7 @@ projects.sort((a, b) => {
           On the side, I learn new languages, write, and try to touch some
           grass.
         </p>
-        <p style='font-weight:bold;'>Follow me on:</p>
+        <p class='font-bold'>Follow me on:</p>
         <SocialStack />
       </div>
     </div>
@@ -59,8 +58,9 @@ projects.sort((a, b) => {
     <h2>Noteworthy Projects</h2>
     <ArticleTable
       articles={projects}
-      head={['Date', 'Project', 'Technologies']}
       includeProjectTag={false}
+      tableHeaders={['Project', 'Tech']}
+      excludeDate
     />
   </section>
   <section>

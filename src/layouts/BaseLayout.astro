@@ -1,11 +1,15 @@
 ---
+type Props = {
+  title?: string
+}
+const { title } = Astro.props
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import Head from '../components/Head.astro'
 ---
 
 <html class='scroll-smooth' lang='en'>
-  <Head title='Chris Holland' />
+  <Head title={title ? `${title} - Chris' Blog"` : "Chris' Blog"} />
   <body>
     <Header />
     <main data-pagefind-body>

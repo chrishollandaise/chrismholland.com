@@ -55,9 +55,7 @@
     {
       "title": "blog",
       "path": "[[workspace]]/src/content/blog",
-      "contentTypes": [
-        "blog"
-      ]
+      "contentTypes": ["blog"]
     }
   ],
   "frontMatter.content.publicFolder": {
