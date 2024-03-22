@@ -7,16 +7,28 @@ const { class: className } = Astro.props
 ---
 
 <div class:list={['mt-5 flex gap-3', className]}>
-  <a target='_blank' href='https://twitter.com/chrishollando'
+  <a
+    aria-label='Follow me on X (formerly Twitter)'
+    target='_blank'
+    href='https://twitter.com/chrishollando'
     ><Icon class='icon-social' name='mdi:twitter' /></a
   >
-  <a target='_blank' href='https://github.com/chrishollandaise'
+  <a
+    aria-label='Follow me on Github'
+    target='_blank'
+    href='https://github.com/chrishollandaise'
     ><Icon class='icon-social' name='mdi:github' /></a
   >
-  <a target='_blank' href='https://www.linkedin.com/in/chmholland/'
+  <a
+    aria-label='Follow me on LinkedIn'
+    target='_blank'
+    href='https://www.linkedin.com/in/chmholland/'
     ><Icon class='icon-social' name='mdi:linkedin' /></a
   >
-  <a target='_blank' href='https://discord.com/users/176835291573780480'
+  <a
+    aria-label='Add me on Discord'
+    target='_blank'
+    href='https://discord.com/users/176835291573780480'
     ><Icon class='icon-social' name='mdi:discord' /></a
   >
 </div>

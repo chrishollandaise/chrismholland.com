@@ -7,9 +7,9 @@ const { isDraft } = Astro.props
 ---
 
 {
-  isDraft ? (
-    <small>
-      <code style='color: black; background-color: lime;'>draft</code>
+  isDraft && (
+    <small class='text-orange-500 ml-2 rounded-lg  border-double align-top'>
+      <code>draft</code>
     </small>
-  ) : null
+  )
 }

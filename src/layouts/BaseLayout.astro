@@ -6,13 +6,17 @@ const { title } = Astro.props
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import Head from '../components/Head.astro'
+import { toTitleCase } from '../util/general'
 ---
 
 <html class='scroll-smooth' lang='en'>
-  <Head title={title ? `${title} - Chris' Blog"` : "Chris' Blog"} />
+  <Head
+    title={title ? `${toTitleCase(title)} | Chris Holland` : 'Chris Holland'}
+  />
+  <a class='sr-only' href='#main'>Skip to main content</a>
   <body>
     <Header />
-    <main>
+    <main id='main'>
       <slot />
     </main>
     <Footer />

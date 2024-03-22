@@ -15,7 +15,7 @@ export default {
   important: true,
   theme: {
     colors: { 'bahunya-gold': '#e3bc5e' },
-    screens: { xs: { max: '498px' }, ...defaultTheme.screens },
+    screens: { xs: { max: '520px' }, ...defaultTheme.screens },
     extend: {}
   }
 }

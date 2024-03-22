@@ -6,7 +6,7 @@ export const toTitleCase = (str: string) =>
 export const renderDate = (date: Date, full: boolean = true) => {
   if (full) {
     return date.toLocaleDateString('en', {
-      month: 'short',
+      month: 'long',
       day: 'numeric',
       year: 'numeric'
     })

@@ -11,7 +11,7 @@ import Back from '../components/BackButton.astro'
 ---
 
 <BaseLayout title={frontmatter.title}>
-  <article class='border-0' data-pagefind-body>
+  <article role='article' class='border-0' data-pagefind-body>
     <Back href='/blog' />
     <div class='flex gap-2'>
       <small>{renderDate(new Date(frontmatter.pubDate))}</small>
@@ -19,8 +19,8 @@ import Back from '../components/BackButton.astro'
     <h1 class='mb-0 mr-0 mt-0' data-pagefind-meta='title'>
       {frontmatter.title}
     </h1>
-    <ul class='flex list-none items-center gap-2 pl-0'>
-      <Icon name='mdi:tags' />
+    <ul aria-label='tags' class='flex list-none items-center gap-2 pl-0'>
+      <Icon aria-hidden='true' name='mdi:tags' />
       {
         (() => {
           frontmatter.tags.sort()
@@ -36,7 +36,7 @@ import Back from '../components/BackButton.astro'
         })()
       }
     </ul>
-    <div>
+    <div id='article-body'>
       <slot />
     </div>
   </article>

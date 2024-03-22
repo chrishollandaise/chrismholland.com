@@ -10,54 +10,55 @@ const {
   articles,
   includeProjectTag = true,
   tableHeaders,
-  excludeDate = false,
-  includeDesc = false
+  excludeDate = false
 } = Astro.props
 import DraftTag from '../components/DraftTag.astro'
 import { renderDate } from '../util/general'
+import Empty from '../components/Empty.astro'
 ---
 
-<table>
-  <thead class='text-center'>
-    {
-      tableHeaders ? (
-        tableHeaders.map((header) => <th>{header}</th>)
-      ) : (
-        <>
-          <th>Date</th>
-          <th>Article</th>
-          <th>Tags</th>
-        </>
-      )
-    }
-  </thead>
-  <tbody>
-    {
-      articles.map((post: any) => {
-        post.data.tags.sort()
-        return (
-          <tr>
-            {!excludeDate ? (
-              <td>{renderDate(new Date(post.data.pubDate), false)}</td>
-            ) : null}
-
-            <td>
-              <a href={`blog/${post.slug}`}>
-                {post.data.title} <DraftTag isDraft={post.data.draft} />
-              </a>
-            </td>
-            <td>
-              {post.data.tags.map((tag: any) => (
-                <a href={`/tags/${tag}`}>
-                  {includeProjectTag || tag !== 'project' ? (
-                    <code>{tag}</code>
-                  ) : null}
+{
+  articles.length == 0 ? (
+    <Empty />
+  ) : (
+    <table>
+      <thead class='text-center'>
+        {tableHeaders ? (
+          tableHeaders.map((header) => <th>{header}</th>)
+        ) : (
+          <>
+            <th>Date</th>
+            <th>Article</th>
+            <th>Tags</th>
+          </>
+        )}
+      </thead>
+      <tbody>
+        {articles.map((post: any) => {
+          post.data.tags.sort()
+          return (
+            <tr>
+              {!excludeDate && (
+                <td>{renderDate(new Date(post.data.pubDate), false)}</td>
+              )}
+              <td>
+                <a href={`blog/${post.slug}`}>
+                  {post.data.title} <DraftTag isDraft={post.data.draft} />
                 </a>
-              ))}
-            </td>
-          </tr>
-        )
-      })
-    }
-  </tbody>
-</table>
+              </td>
+              <td>
+                {post.data.tags
+                  .filter((tag: string) => tag !== 'project')
+                  .map((tag: any) => (
+                    <a href={`/tags/${tag}`}>
+                      <code>{tag}</code>
+                    </a>
+                  ))}
+              </td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+  )
+}

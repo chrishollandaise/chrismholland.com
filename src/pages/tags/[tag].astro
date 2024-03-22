@@ -33,7 +33,7 @@ const { posts } = Astro.props
 export const prerender = true
 ---
 
-<BaseLayout>
+<BaseLayout title=`Articles about ${tag}`>
   <h2>Blog</h2>
   <BackButton href='/blog' />
   <div class='text-center'>

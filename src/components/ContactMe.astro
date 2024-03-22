@@ -48,6 +48,7 @@ if (Astro.request.method === 'POST') {
         name='name'
         placeholder='T-800'
         maxlength='50'
+        aria-required='true'
         required
       />
     </label>
@@ -59,17 +60,19 @@ if (Astro.request.method === 'POST') {
         type='email'
         name='email'
         maxlength='320'
+        aria-required='true'
         placeholder='terminate@skynet.com'
         pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
         required
       />
     </label>
-    <label class='hmm'>
+    <label class='hidden'>
       Phone Number <input
         name='phone'
         type='tel'
         placeholder='555-2368'
         pattern='[+]{1}[0-9]{11,14}'
+        tabindex='-1'
       />
     </label>
     <label>
@@ -78,6 +81,7 @@ if (Astro.request.method === 'POST') {
         name='message'
         cols='50'
         maxlength='1250'
+        aria-required='true'
         placeholder='You are terminated.'
         required></textarea>
     </label>
