@@ -12,14 +12,6 @@ import '../styles/global.css'
   <meta name='viewport' content='width=device-width' />
   <meta name='generator' content={Astro.generator} />
   <link rel='sitemap' href='/sitemap-index.xml' />
-  <!-- Pagefind -->
-  <link
-    rel='preload'
-    as='style'
-    onload="this.onload=null;this.rel='stylesheet'"
-    href='/pagefind/pagefind-ui.css'
-  />
-  <script src='/pagefind/pagefind-ui.js' is:inline></script>
 </head>
 <!-- RSS -->
 <link
@@ -34,16 +26,11 @@ import '../styles/global.css'
   href='https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css'
 />
 <!-- Plausible Analytics -->
-{
-  import.meta.env.DEV && (
-    <script
-      type='text/partytown'
-      async
-      data-domain='v2.chrismholland.com'
-      data-api='v2.chrismholland.com/apollo/event'
-      src='https://v2.chrismholland.com/apollo/script.js'
-    />
-  )
-}
+<script
+  type='text/partytown'
+  async
+  data-domain='v2.chrismholland.com'
+  data-api='v2.chrismholland.com/peon/athena/event'
+  src='https://v2.chrismholland.com/peon/apollo/script.js'></script>
 
 <title>{title}</title>
