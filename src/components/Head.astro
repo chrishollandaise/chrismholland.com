@@ -12,26 +12,27 @@ import '../styles/global.css'
   <meta name='viewport' content='width=device-width' />
   <meta name='generator' content={Astro.generator} />
   <link rel='sitemap' href='/sitemap-index.xml' />
-</head>
-<!-- RSS -->
-<link
-  rel='alternate'
-  type='application/rss+xml'
-  title='Chris Holland'
-  href={`${Astro.site}rss.xml`}
-/>
-<!-- CSS Styling -->
-<link
-  rel='stylesheet'
-  href='https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css'
-/>
-<!-- Plausible Analytics -->
-<script
-  type='text/partytown'
-  async
-  data-domain='v2.chrismholland.com'
-  data-api='https://worker-blue-butterfly-5c63.chrishollandaise.workers.dev/athena/event'
-  src='https://worker-blue-butterfly-5c63.chrishollandaise.workers.dev/apollo/script.js'
-></script>
 
-<title>{title}</title>
+  <!-- RSS -->
+  <link
+    rel='alternate'
+    type='application/rss+xml'
+    title='Chris Holland'
+    href={`${Astro.site}rss.xml`}
+  />
+  <!-- CSS Styling -->
+  <link
+    rel='stylesheet'
+    href='https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css'
+  />
+  <!-- Plausible Analytics -->
+  <script
+    type='text/partytown'
+    async
+    data-domain='v2.chrismholland.com'
+    data-api='https://worker-blue-butterfly-5c63.chrishollandaise.workers.dev/athena/event'
+    src='https://worker-blue-butterfly-5c63.chrishollandaise.workers.dev/apollo/script.js'
+  ></script>
+
+  <title>{title}</title>
+</head>

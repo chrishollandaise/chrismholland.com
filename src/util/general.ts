@@ -1,5 +1,3 @@
-import type { MarkdownInstance } from 'astro'
-
 export const toTitleCase = (str: string) =>
   str.replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
 

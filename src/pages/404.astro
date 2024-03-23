@@ -1,22 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { say } from 'cowsay'
-import quotes from '../assets/cowsay.json'
+import { getEntry } from 'astro:content'
 
-const cowSayOptions = {
-  text: quotes[Math.floor(Math.random() * quotes.length)].quote,
-  f: 'default',
-  d: true,
-  wrapLength: 1,
-  wrap: true
-}
+const cow = await (await getEntry('misc', '404')).body
 ---
 
-<BaseLayout>
+<BaseLayout title='404'>
   <figure class='flex justify-center' aria-label='404. Page Not Found.'>
-    <pre
-      class='noselect xs:text-[12px]'
-      aria-hidden='true'>{say(cowSayOptions)}
-    </pre>
+    <pre class='noselect xs:text-[12px]' aria-hidden='true'>{cow}</pre>
   </figure>
 </BaseLayout>

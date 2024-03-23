@@ -1,10 +1,28 @@
 ---
+import { version } from '../../package.json'
 type Props = Record<string, never>
 import SocialStack from './SocialStack.astro'
 ---
 
-<footer class='text-center'>
-  <SocialStack class='justify-center' />
-  <p>Made by Chris Holland. 2024.</p>
-  <p>Built in %X_SECONDS%</p>
+<footer class='flex flex-col items-center gap-2'>
+  <SocialStack class='mb-5' />
+
+  <span class='m-0 flex gap-1'>
+    © 2024 Chris Holland
+    <span>•</span>
+    <a
+      class='twp underline'
+      aria-label=`Link to my personal website's Github repository`
+      href='https://github.com/chrishollandaise/personal-website/tree/%FULL_COMMIT_HASH%'
+      >{version} (%SHORT_COMMIT_HASH%)</a
+    ><span>•</span>
+    <a class='twp underline' href='#'>Top</a>
+    <span>•</span>
+    <a class='twp underline' href='/rss.xml'>RSS</a>
+  </span>
+  <p class='m-0'>
+    %X_SECONDS%. Made with <a class='twp underline' href='https://astro.build/'
+      >Astro 🚀</a
+    >
+  </p>
 </footer>
