@@ -8,6 +8,7 @@ import icon from 'astro-icon'
 import tailwind from '@astrojs/tailwind'
 
 import partytown from '@astrojs/partytown'
+import { squooshImageService } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
@@ -46,8 +47,11 @@ export default defineConfig({
         className: ['']
       }
     }
+  },
+  image: {
+    service: squooshImageService()
   }
   // adapter: cloudflare({
-  //   imageService: 'passthrough'
+  //   imageService: 'compile'
   // })
 })

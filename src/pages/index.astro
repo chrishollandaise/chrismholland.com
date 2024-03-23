@@ -7,6 +7,7 @@ import Avatar from '../assets/32portraitHD_4.png'
 import ArticleTable from '../components/ArticleTable.astro'
 import SocialStack from '../components/SocialStack.astro'
 import { filterDrafts } from '../util/general'
+import { getEntry } from 'astro:content'
 
 const latestArticles = await getCollection('blog', (post) => {
   return !post.data.tags.includes('project') && filterDrafts(post)
@@ -23,6 +24,9 @@ const projects = await getCollection('blog', (post) => {
 projects.sort((a, b) => {
   return a.data.title > b.data.title ? 1 : -1
 })
+
+const introduction = await (await getEntry('misc', 'who-am-i')).render()
+const links = await (await getEntry('misc', 'quick-links')).render()
 ---
 
 <BaseLayout title='Home'>
@@ -37,18 +41,13 @@ projects.sort((a, b) => {
         src={Avatar}
         alt='Pixelated avatar of me'
         width='256'
-        format='avif'
-        quality={50}
+        format='webp'
+        decoding='async'
+        loading='lazy'
+        quality={80}
       />
       <div class='xs:text-center'>
-        <p>
-          I am a lifelong learner who loves coaxing computers into solving
-          real-world headaches. I live for crafting simple yet impactful tech.
-        </p>
-        <p>
-          On the side, I learn new languages, write, and try to touch some
-          grass.
-        </p>
+        <introduction.Content />
         <p class='font-bold'>Follow me on:</p>
         <SocialStack class='xs:justify-center' />
       </div>
@@ -69,10 +68,7 @@ projects.sort((a, b) => {
   </section>
   <section>
     <h2>Quick Links</h2>
-    <ul>
-      <li><a href='/'>dot config</a></li>
-      <li><a href='/'>vim bindings</a></li>
-    </ul>
+    <links.Content />
   </section>
   <ContactMe />
 </BaseLayout>

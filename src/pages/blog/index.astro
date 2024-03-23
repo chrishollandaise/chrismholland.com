@@ -8,6 +8,7 @@ import {
   byTime,
   filterDrafts
 } from '../../util/general'
+import Empty from '../../components/Empty.astro'
 
 const allPosts = await getCollection('blog', (post) => filterDrafts(post))
 allPosts.sort(byTime)
@@ -17,26 +18,29 @@ const uniqueTags = getAllUniqueTags(allPosts)
 
 <BaseLayout title='Blog'>
   <h2>Blog</h2>
+  {
+    allPosts.length == 0 ? (
+      <Empty class='text-center' />
+    ) : (
+      <>
+        <div class='text-center'>
+          <h3>Tags:</h3>
+          {uniqueTags.map((tag) => {
+            return <a href={`/tags/${tag}`}>{<code>{tag}</code>} </a>
+          })}
+        </div>
+        <ul class='article' class='list-none'>
+          {allPosts.map((post) => (
+            <li class='flex justify-between'>
+              <a href={`/blog/${post.slug}`}>
+                {post.data.title} <DraftTag isDraft={post.data.draft} />
+              </a>
 
-  <div class='text-center'>
-    <h3>Tags:</h3>
-    {
-      uniqueTags.map((tag) => {
-        return <a href={`/tags/${tag}`}>{<code>{tag}</code>} </a>
-      })
-    }
-  </div>
-  <ul class='article' class='list-none'>
-    {
-      allPosts.map((post) => (
-        <li class='flex justify-between'>
-          <a href={`/blog/${post.slug}`}>
-            {post.data.title} <DraftTag isDraft={post.data.draft} />
-          </a>
-
-          <span class='text-end'>{renderDate(post.data.pubDate)}</span>
-        </li>
-      ))
-    }
-  </ul>
+              <span class='text-end'>{renderDate(post.data.pubDate)}</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
 </BaseLayout>

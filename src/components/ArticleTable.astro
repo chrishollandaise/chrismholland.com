@@ -46,7 +46,7 @@ import Empty from '../components/Empty.astro'
                   {post.data.title} <DraftTag isDraft={post.data.draft} />
                 </a>
               </td>
-              <td>
+              <td class='flex gap-2'>
                 {post.data.tags
                   .filter((tag: string) => tag !== 'project')
                   .map((tag: any) => (

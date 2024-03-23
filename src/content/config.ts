@@ -16,6 +16,11 @@ const blogCollection = defineCollection({
   schema: blogSchema
 })
 
+const miscCollection = defineCollection({
+  type: 'content'
+})
+
 export const collections = {
-  blog: blogCollection
+  blog: blogCollection,
+  misc: miscCollection
 }

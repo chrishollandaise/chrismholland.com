@@ -13,9 +13,10 @@ import { Icon } from 'astro-icon/components'
   >
     <Icon name='mdi:magnify' />
   </button>
+  <!-- expand border roudned to small -->
   <dialog
     aria-label='Search through site content'
-    class='h-full max-h-full w-full max-w-full border border-[rgb(33,37,44)] shadow backdrop:backdrop-blur sm:mx-auto sm:mb-auto sm:mt-16 sm:h-max sm:max-h-[calc(100%-8rem)] sm:min-h-[15rem] sm:w-5/6 sm:max-w-[48rem] sm:rounded-md'
+    class='h-full max-h-full w-full max-w-full border border-[rgb(33,37,44)] shadow backdrop:backdrop-blur xs:rounded-none xs:border-0 sm:mx-auto sm:mb-auto sm:mt-16 sm:h-max sm:max-h-[calc(100%-8rem)] sm:min-h-[15rem] sm:w-5/6 sm:max-w-[48rem] sm:rounded-md'
   >
     <div class='dialog-frame flex flex-col gap-4 p-6 pt-12 sm:pt-6'>
       <button
@@ -24,19 +25,17 @@ import { Icon } from 'astro-icon/components'
         data-close-modal><Icon name='mdi:close' /></button
       >
       {
-        (
-          // import.meta.env.DEV ? (
-          //   <div class='mx-auto text-center'>
-          //     <p>
-          //       Search is only available in production builds. <br />
-          //       Try building and previewing the site to test it out locally.
-          //     </p>
-          //   </div>
-          // ) : (
+        import.meta.env.DEV ? (
+          <div class='mx-auto text-center'>
+            <p>
+              Search is only available in production builds. <br />
+              Try building and previewing the site to test it out locally.
+            </p>
+          </div>
+        ) : (
           <div class='search-container'>
             <div id='my__search' />
           </div>
-          // )
         )
       }
     </div>
@@ -52,9 +51,17 @@ import { Icon } from 'astro-icon/components'
 
     closeModal = () => {
       if (this.dialog.open) {
-        this.dialog.close()
-        this.revertBodyPageScroll()
-        window.removeEventListener('click', this.onWindowClick)
+        this.dialog.setAttribute('closing', '')
+        this.dialog.addEventListener(
+          'animationend',
+          (event) => {
+            this.dialog.close()
+            this.dialog.removeAttribute('closing')
+            this.revertBodyPageScroll()
+            window.removeEventListener('click', this.onWindowClick)
+          },
+          { once: true }
+        )
       }
     }
 
@@ -79,10 +86,14 @@ import { Icon } from 'astro-icon/components'
     }
 
     onWindowKeydown = (e: KeyboardEvent) => {
-      // check if it's the / key
-      if (e.key === '/' && !this.dialog.open) {
+      if (e.key === 'k' && e.ctrlKey && !this.dialog.open) {
         this.openModal()
         e.preventDefault()
+      } else {
+        if (e.key === 'k' && e.ctrlKey && this.dialog.open) {
+          this.closeModal()
+          e.preventDefault()
+        }
       }
     }
 

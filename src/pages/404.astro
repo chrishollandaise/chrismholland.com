@@ -2,13 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { say } from 'cowsay'
 import quotes from '../assets/cowsay.json'
+
+const cowSayOptions = {
+  text: quotes[Math.floor(Math.random() * quotes.length)].quote,
+  f: 'default',
+  d: true,
+  wrapLength: 1,
+  wrap: true
+}
 ---
 
 <BaseLayout>
-  <figure aria-label='404. Page Not Found.'>
+  <figure class='flex justify-center' aria-label='404. Page Not Found.'>
     <pre
-      class='noselect'
-      aria-hidden='true'>{say({ text: quotes[Math.floor(Math.random() * quotes.length)].quote, f: "stegosaurus", d: true})}
+      class='noselect xs:text-[12px]'
+      aria-hidden='true'>{say(cowSayOptions)}
     </pre>
   </figure>
 </BaseLayout>

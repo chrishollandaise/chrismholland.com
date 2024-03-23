@@ -1,1 +1,9 @@
-<p>Nothing quite here yet...</p>
+---
+interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+---
+
+<p class:list={[className]}>Nothing quite here yet...</p>

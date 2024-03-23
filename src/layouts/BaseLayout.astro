@@ -13,8 +13,10 @@ import { toTitleCase } from '../util/general'
   <Head
     title={title ? `${toTitleCase(title)} | Chris Holland` : 'Chris Holland'}
   />
+  <!-- skip link -->
   <a class='sr-only' href='#main'>Skip to main content</a>
-  <body>
+  <!-- making sure scroll bar doesn't cause layout shift -->
+  <body class='[scrollbar-gutter:stable]'>
     <Header />
     <main id='main'>
       <slot />
