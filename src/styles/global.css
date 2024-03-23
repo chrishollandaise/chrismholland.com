@@ -184,45 +184,10 @@ a:focus-visible {
   }
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0%;
-  }
-  100% {
-    opacity: 100%;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 100%;
-  }
-  100% {
-    opacity: 0%;
-  }
-}
-
-@media (prefers-reduced-motion) {
-  dialog[open] {
-    animation: none;
-  }
-  dialog[closing] {
-    animation: none;
-  }
-}
-
 dialog[open] {
   -webkit-animation: slide-in-blurred-top 0.1s cubic-bezier(0.23, 1, 0.32, 1)
     both;
   animation: slide-in-blurred-top 0.2s cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-
-dialog[open]::backdrop {
-  animation: fade-in 0.2s linear;
-}
-
-dialog[closing]::backdrop {
-  animation: fade-out 5s linear;
 }
 
 dialog[closing] {
@@ -230,4 +195,17 @@ dialog[closing] {
     cubic-bezier(0.755, 0.05, 0.855, 0.06) both;
   animation: slide-out-blurred-top 0.2s cubic-bezier(0.755, 0.05, 0.855, 0.06)
     both;
+}
+
+@media (prefers-reduce-motion: reduce) {
+  *,
+  :before,
+  :after {
+    -webkit-animation-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

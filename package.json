@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "astro dev",
     "dev:remote": "astro dev --remote",
+    "dev:host": "astro dev --host",
     "start": "astro dev",
     "format": "npx prettier 'src/**/*.{js,ts,mjs,cjs,json,astro,css}' --write",
     "lint": "eslint .",
     "build:pagefind": "npx pagefind --site 'dist' && cp -r dist/pagefind public/",
     "build": "astro check && astro build && npm run build:pagefind",
-    "preview": "astro preview",
+    "preview": "astro preview ",
     "astro": "astro"
   },
   "dependencies": {

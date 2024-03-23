@@ -2,14 +2,21 @@
 type Props = Record<string, never>
 import { Icon } from 'astro-icon/components'
 import Search from '../components/Search.astro'
+import ActiveAnchor from './ActiveAnchor.astro'
+const currentPath = Astro.url.pathname
 ---
 
-<nav role='navigation' class='xs:flex xs:flex-wrap xs:justify-between'>
-  <a aria-label='link to home page' class='block' href='/'>[chris holland]</a>
+<nav
+  role='navigation'
+  class='items-start xs:flex xs:flex-wrap xs:justify-between'
+>
+  <a aria-label='link to home page' class='block self-start' href='/'
+    >[chris holland]</a
+  >
 
   <ul
     id='menu'
-    class='flex flex-row xs:order-last xs:hidden xs:basis-full xs:flex-col xs:text-center'
+    class='flex flex-row align-top xs:order-last xs:hidden xs:basis-full xs:flex-col xs:text-center'
   >
     <!-- easier to click link since whole block is clickable -->
     <li>
@@ -22,19 +29,28 @@ import Search from '../components/Search.astro'
       <a class='block' href='/Holland_Chris_Resume.pdf'>resume</a>
     </li>
     <li>
-      <a class='block' href='/#contact-me'>contact</a>
+      <a id='contact-link' class='block' href='/#contact-me'>contact</a>
     </li>
   </ul>
 
-  <div class='ml-auto flex'>
+  <div class='my-[10px] ml-auto flex items-end gap-3'>
     <Search />
-    <button id='menu-btn' class='twp hidden border-0 xs:order-last xs:block'>
+    <button
+      style='background: transparent'
+      id='menu-btn'
+      class='twp hidden border-0 p-0 text-2xl xs:order-last xs:block'
+    >
       <Icon
-        class='m-3 hidden text-2xl xs:block'
+        class='hidden p-0 xs:block'
         name='mdi:hamburger-menu'
         id='menu-burger'
       />
-      <Icon id='close' class='m-3 hidden text-2xl xs:hidden' name='mdi:close' />
+      <Icon
+        id='close'
+        style='background: none; !important'
+        class='hidden xs:hidden'
+        name='mdi:close'
+      />
     </button>
   </div>
 </nav>

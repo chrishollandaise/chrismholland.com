@@ -4,10 +4,11 @@ import '@pagefind/default-ui/css/ui.css'
 import { Icon } from 'astro-icon/components'
 ---
 
-<site-search class='ms-auto' id='search'>
+<site-search id='search'>
   <button
     aria-label='open search menu'
-    class='twp m-3 border-0 text-2xl'
+    class='twp border-0 p-0 text-2xl'
+    style='background: none; !important '
     data-open-modal
     disabled
   >
@@ -20,22 +21,24 @@ import { Icon } from 'astro-icon/components'
   >
     <div class='dialog-frame flex flex-col gap-4 p-6 pt-12 sm:pt-6'>
       <button
-        style='background: transparent;'
         class='m-0 ms-auto cursor-pointer border-none p-0 text-3xl font-semibold'
+        style='background: transparent;'
         data-close-modal><Icon name='mdi:close' /></button
       >
       {
-        import.meta.env.DEV ? (
-          <div class='mx-auto text-center'>
-            <p>
-              Search is only available in production builds. <br />
-              Try building and previewing the site to test it out locally.
-            </p>
-          </div>
-        ) : (
+        (
+          // import.meta.env.DEV ? (
+          //   <div class='mx-auto text-center'>
+          //     <p>
+          //       Search is only available in production builds. <br />
+          //       Try building and previewing the site to test it out locally.
+          //     </p>
+          //   </div>
+          // ) : (
           <div class='search-container'>
             <div id='my__search' />
           </div>
+          // )
         )
       }
     </div>
@@ -54,7 +57,7 @@ import { Icon } from 'astro-icon/components'
         this.dialog.setAttribute('closing', '')
         this.dialog.addEventListener(
           'animationend',
-          (event) => {
+          () => {
             this.dialog.close()
             this.dialog.removeAttribute('closing')
             this.revertBodyPageScroll()
@@ -131,6 +134,14 @@ import { Icon } from 'astro-icon/components'
           showSubResults: true,
           highlightParam: 'highlight'
         })
+        this.querySelector('.pagefind-ui__search-input')?.addEventListener(
+          'keyup',
+          (e: any) => {
+            if (e.key === 'Enter') {
+              e.target.blur()
+            }
+          }
+        )
       })
     }
 

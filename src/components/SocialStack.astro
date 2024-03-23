@@ -6,30 +6,30 @@ import { Icon } from 'astro-icon/components'
 const { class: className } = Astro.props
 ---
 
-<div class:list={['mt-5 flex gap-3', className]}>
+<div class:list={['mt-5 flex gap-3 xs:gap-10 ', className]}>
   <a
     aria-label='Follow me on X (formerly Twitter)'
     target='_blank'
     href='https://twitter.com/chrishollando'
-    ><Icon class='icon-social' name='mdi:twitter' /></a
+    ><Icon class='icon-social xs:text-3xl' name='mdi:twitter' /></a
   >
   <a
     aria-label='Follow me on Github'
     target='_blank'
     href='https://github.com/chrishollandaise'
-    ><Icon class='icon-social' name='mdi:github' /></a
+    ><Icon class='icon-social xs:text-3xl' name='mdi:github' /></a
   >
   <a
     aria-label='Follow me on LinkedIn'
     target='_blank'
     href='https://www.linkedin.com/in/chmholland/'
-    ><Icon class='icon-social' name='mdi:linkedin' /></a
+    ><Icon class='icon-social xs:text-3xl' name='mdi:linkedin' /></a
   >
   <a
     aria-label='Add me on Discord'
     target='_blank'
     href='https://discord.com/users/176835291573780480'
-    ><Icon class='icon-social' name='mdi:discord' /></a
+    ><Icon class='icon-social xs:text-3xl' name='mdi:discord' /></a
   >
 </div>
 

@@ -20,24 +20,30 @@ import '../styles/global.css'
     href='/pagefind/pagefind-ui.css'
   />
   <script src='/pagefind/pagefind-ui.js' is:inline></script>
-  <script is:inline type='module'>
-    await import('/pagefind/pagefind-highlight.js')
-    new PagefindHighlight({
-      highlightParam: 'highlight',
-      markContext: '[data-pagefind-body]'
-    })
-  </script>
-  <!-- RSS -->
-  <link
-    rel='alternate'
-    type='application/rss+xml'
-    title='Chris Holland'
-    href={`${Astro.site}rss.xml`}
-  />
-  <!-- CSS Styling -->
-  <link
-    rel='stylesheet'
-    href='https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css'
-  />
-  <title>{title}</title>
 </head>
+<!-- RSS -->
+<link
+  rel='alternate'
+  type='application/rss+xml'
+  title='Chris Holland'
+  href={`${Astro.site}rss.xml`}
+/>
+<!-- CSS Styling -->
+<link
+  rel='stylesheet'
+  href='https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css'
+/>
+<!-- Plausible Analytics -->
+{
+  import.meta.env.DEV && (
+    <script
+      type='text/partytown'
+      async
+      data-domain='v2.chrismholland.com'
+      data-api='v2.chrismholland.com/apollo/event'
+      src='https://v2.chrismholland.com/apollo/script.js'
+    />
+  )
+}
+
+<title>{title}</title>

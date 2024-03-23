@@ -50,7 +50,7 @@ export default defineConfig({
   },
   image: {
     service: squooshImageService()
-  }
+  },
   adapter: cloudflare({
     imageService: 'compile'
   })
