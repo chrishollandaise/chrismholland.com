@@ -7,7 +7,9 @@ CURRENT_COMMIT_HASH_SHORT=`git rev-parse --short HEAD`
 
 
 for i in $(find dist/* | grep .html); do
-  sed -i "s/%X_SECONDS%/$BUILD_TIME/g" "$i"
-  sed -i "s/%SHORT_COMMIT_HASH%/$CURRENT_COMMIT_HASH_SHORT/g" "$i"
-  sed -i "s/%FULL_COMMIT_HASH%/$CURRENT_COMMIT_HASH_FULL/g" "$i"
+  gsed -i "s/%X_SECONDS%/$BUILD_TIME/g" "$i"
+  gsed -i "s/%SHORT_COMMIT_HASH%/$CURRENT_COMMIT_HASH_SHORT/g" "$i"
+  gsed -i "s/%FULL_COMMIT_HASH%/$CURRENT_COMMIT_HASH_FULL/g" "$i"
 done
+
+echo "\n[postbuild] Finished post build."
