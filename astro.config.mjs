@@ -13,7 +13,7 @@ import { squooshImageService } from 'astro/config'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://chrismholland.com',
-  // output: 'hybrid',
+  output: 'hybrid',
   i18n: {
     defaultLocale: 'en',
     locales: ['en']
@@ -51,7 +51,7 @@ export default defineConfig({
   image: {
     service: squooshImageService()
   }
-  // adapter: cloudflare({
-  //   imageService: 'compile'
-  // })
+  adapter: cloudflare({
+    imageService: 'compile'
+  })
 })
