@@ -5,6 +5,8 @@ BUILD_TIME=$(grep -o '\d\+\spage.\+')
 
 echo $BUILD_TIME
 
+echo ls dist
+
 CURRENT_COMMIT_HASH_FULL=$(git rev-parse HEAD)
 CURRENT_COMMIT_HASH_SHORT=$(git rev-parse --short HEAD)
 
