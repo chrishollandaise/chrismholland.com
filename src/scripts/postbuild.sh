@@ -2,7 +2,8 @@
 # Unsure currently if this can be done via astro integration (build done hook), but it works.
 tee build-output.txt && cat build-output.txt
 
-BUILD_TIME=$(grep -o '[0-9]\spage(s)\sbuilt.*')
+
+BUILD_TIME=$(tail -2 build-output.txt | head -1 | cut -c 17-)
 
 CURRENT_COMMIT_HASH_FULL=$(git rev-parse HEAD)
 CURRENT_COMMIT_HASH_SHORT=$(git rev-parse --short HEAD)
