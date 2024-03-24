@@ -7,6 +7,6 @@ const cow = await (await getEntry('misc', '404')).body
 
 <BaseLayout title='404'>
   <figure class='flex justify-center' aria-label='404. Page Not Found.'>
-    <pre class='noselect xs:text-[12px]' aria-hidden='true'>{cow}</pre>
+    <pre class='select-none xs:text-[12px]' aria-hidden='true'>{cow}</pre>
   </figure>
 </BaseLayout>

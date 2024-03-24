@@ -52,19 +52,26 @@ import { Icon } from 'astro-icon/components'
     private dialogFrame: HTMLDivElement
     private openBtn: HTMLButtonElement
 
+    closeCleanUp = () => {
+      this.dialog.close()
+      this.dialog.removeAttribute('closing')
+      this.revertBodyPageScroll()
+      window.removeEventListener('click', this.onWindowClick)
+    }
+
     closeModal = () => {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+
       if (this.dialog.open) {
         this.dialog.setAttribute('closing', '')
-        this.dialog.addEventListener(
-          'animationend',
-          () => {
-            this.dialog.close()
-            this.dialog.removeAttribute('closing')
-            this.revertBodyPageScroll()
-            window.removeEventListener('click', this.onWindowClick)
-          },
-          { once: true }
-        )
+
+        if (!mediaQuery || mediaQuery.matches) {
+          this.closeCleanUp()
+        } else {
+          this.dialog.addEventListener('animationend', this.closeCleanUp, {
+            once: true
+          })
+        }
       }
     }
 

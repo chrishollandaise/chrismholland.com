@@ -1,7 +1,7 @@
 ---
 // import { db, Contact } from "astro:db";
 // import sendMail from "../util/sendMail";
-
+export const prerender = false
 if (Astro.request.method === 'POST') {
   try {
     const data = await Astro.request.formData()
@@ -24,6 +24,7 @@ if (Astro.request.method === 'POST') {
       dateSent,
       metadata: { ip: clientIP }
     }
+
     // TODO: add a honeypot, and a simple turing test.
     // Should also look into IP throttling, send one email twice a month
     //@ts-ignore
@@ -34,58 +35,57 @@ if (Astro.request.method === 'POST') {
       console.error(error.message)
     }
   }
+  return Astro.redirect('/')
 }
 ---
 
-<section id='contact-me'>
-  <h2>Contact Me</h2>
-  <form method='POST' class='xs:flex xs:flex-col xs:gap-5'>
-    <label class='xs:flex xs:flex-col'>
-      Name:
-      <input
-        class='xs:mr-0'
-        type='text'
-        name='name'
-        placeholder='T-800'
-        maxlength='50'
-        aria-required='true'
-        required
-      />
-    </label>
-    <label class='xs:mr-0 xs:flex xs:flex-col'>
-      <!-- RFC 5321, email address max length is 320 characters -->
-      Email:
-      <input
-        class='xs:mr-0'
-        type='email'
-        name='email'
-        maxlength='320'
-        aria-required='true'
-        placeholder='terminate@skynet.com'
-        pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
-        required
-      />
-    </label>
-    <label class='hidden'>
-      Phone Number <input
-        name='phone'
-        type='tel'
-        placeholder='555-2368'
-        pattern='[+]{1}[0-9]{11,14}'
-        tabindex='-1'
-      />
-    </label>
-    <label>
-      Message:
-      <textarea
-        name='message'
-        cols='50'
-        maxlength='1250'
-        aria-required='true'
-        placeholder='You are terminated.'
-        required></textarea>
-    </label>
-    <br />
-    <button class='px-5 xs:w-full xs:p-3' type='submit'>Submit</button>
-  </form>
-</section>
+<form method='POST' class='xs:flex xs:flex-col xs:gap-5'>
+  <label class='xs:flex xs:flex-col'>
+    Name:
+    <input
+      class='xs:mr-0'
+      type='text'
+      name='name'
+      placeholder='T-800'
+      maxlength='50'
+      aria-required='true'
+      required
+    />
+  </label>
+  <label class='xs:mr-0 xs:flex xs:flex-col'>
+    <!-- RFC 5321, email address max length is 320 characters -->
+    Email:
+    <input
+      class='xs:mr-0'
+      type='email'
+      name='email'
+      maxlength='320'
+      aria-required='true'
+      placeholder='terminate@skynet.com'
+      pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
+      required
+    />
+  </label>
+
+  <label class='hidden'>
+    Phone Number <input
+      name='phone'
+      type='tel'
+      placeholder='555-2368'
+      pattern='[+]{1}[0-9]{11,14}'
+      tabindex='-1'
+    />
+  </label>
+  <label>
+    Message:
+    <textarea
+      name='message'
+      cols='50'
+      maxlength='1250'
+      aria-required='true'
+      placeholder='You are terminated.'
+      required></textarea>
+  </label>
+  <br />
+  <button class='px-5 xs:w-full xs:p-3' type='submit'> Submit</button>
+</form>

@@ -14,20 +14,21 @@ import Search from '../components/Search.astro'
 
   <ul
     id='menu'
-    class='flex flex-row align-top xs:order-last xs:hidden xs:basis-full xs:flex-col xs:text-center'
+    data-state='open'
+    class='animate-scale xs:data-[state=open]:opacity-1 flex flex-row align-top transition-opacity duration-300 xs:order-last xs:hidden xs:basis-full xs:flex-col xs:text-center xs:data-[state=close]:opacity-0'
   >
     <!-- easier to click link since whole block is clickable -->
     <li>
       <a class='block' href='/blog'>writings</a>
     </li>
     <li>
-      <a class='block' href='/tags/project'>projects</a>
+      <a class='block' ' href='/tags/project'>projects</a>
     </li>
     <li>
       <a class='block' href='/Holland_Chris_Resume.pdf'>resume</a>
     </li>
     <li>
-      <a id='contact-link' class='block' href='/#contact-me'>contact</a>
+      <a class='block' href='/contact'>contact</a>
     </li>
   </ul>
 
@@ -69,9 +70,18 @@ import Search from '../components/Search.astro'
     } else {
       // Hide mobile menu
       menu?.classList.replace('xs:flex', 'xs:hidden')
-      // Show close button
+      // Hide close button
       closeIcon?.classList.replace('xs:block', 'xs:hidden')
+      menuBurgerIcon?.classList.replace('xs:hidden', 'xs:block')
+      menu?.setAttribute('state', 'close')
+    }
+  })
 
+  const nonMobile = window.matchMedia('(min-width: 521px)')
+  nonMobile.addEventListener('change', () => {
+    if (nonMobile.matches) {
+      menu?.classList.replace('xs:flex', 'xs:hidden')
+      closeIcon?.classList.replace('xs:block', 'xs:hidden')
       menuBurgerIcon?.classList.replace('xs:hidden', 'xs:block')
     }
   })

@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import ContactMe from '../components/ContactMe.astro'
 import { getCollection } from 'astro:content'
 import { Image } from 'astro:assets'
 import Avatar from '../assets/32portraitHD_4.png'
@@ -70,5 +69,4 @@ const links = await (await getEntry('misc', 'quick-links')).render()
     <h2>Quick Links</h2>
     <links.Content />
   </section>
-  <ContactMe />
 </BaseLayout>

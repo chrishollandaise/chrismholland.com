@@ -22,3 +22,5 @@ pnpm-debug.log*
 
 # frontmatter
 .frontmatter/
+
+build-output.txt

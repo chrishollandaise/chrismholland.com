@@ -7,22 +7,28 @@ import SocialStack from './SocialStack.astro'
 <footer class='flex flex-col items-center gap-2'>
   <SocialStack class='mb-5' />
 
-  <span class='m-0 flex gap-1'>
-    © 2024 Chris Holland
-    <span>•</span>
+  <div class='m-0 flex gap-1 text-sm'>
+    <span class='leading-[27.2px]'>&copy; 2024 Chris Holland</span>
+    <span aria-hidden='true'>&#8226;</span>
     <a
       class='twp underline'
-      aria-label=`Link to my personal website's Github repository`
+      aria-label=`Go to my personal website's Github repository`
       href='https://github.com/chrishollandaise/personal-website/tree/%FULL_COMMIT_HASH%'
-      >{version} (%SHORT_COMMIT_HASH%)</a
-    ><span>•</span>
-    <a class='twp underline' href='#'>Top</a>
-    <span>•</span>
-    <a class='twp underline' href='/rss.xml'>RSS</a>
-  </span>
-  <p class='m-0'>
+      >v{version} (%SHORT_COMMIT_HASH%)</a
+    ><span aria-hidden='true'>&#8226;</span>
+    <a
+      aria-label='Go back to the top of the page'
+      class='twp underline'
+      href='#'>Top</a
+    >
+    <span aria-hidden='true'>&#8226;</span>
+    <a aria-label='Go to my RSS feed' class='twp underline' href='/rss.xml'
+      >RSS</a
+    >
+  </div>
+  <p class='m-0 text-sm'>
     %X_SECONDS%. Made with <a class='twp underline' href='https://astro.build/'
-      >Astro 🚀</a
+      >Astro &#128640;</a
     >
   </p>
 </footer>
