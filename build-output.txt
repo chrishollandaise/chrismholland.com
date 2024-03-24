@@ -1,0 +1,83 @@
+18:26:08 Types generated 141ms
+18:26:08 [astro:db] database: local database.
+18:26:08 [build] output: "static"
+18:26:08 [build] directory: /Users/chris/dev/chrishollandaise.github.io/dist/
+18:26:08 [build] Collecting build info...
+18:26:08 [build] ✓ Completed in 218ms.
+18:26:08 [build] Building static entrypoints...
+18:26:09 [astro-icon] Loaded icons from mdi
+18:26:10 [vite] ✓ built in 1.45s
+18:26:10 [build] ✓ Completed in 1.47s.
+
+ building client (vite) 
+18:26:10 [vite] transforming...
+18:26:10 [vite] ✓ 6 modules transformed.
+18:26:10 [vite] rendering chunks...
+18:26:10 [vite] computing gzip size...
+18:26:10 [vite] dist/_astro/hoisted.BVL59Wqb.js                                           0.14 kB │ gzip:  0.11 kB
+18:26:10 [vite] dist/_astro/Navigation.astro_astro_type_script_index_0_lang.DI5P0GX-.js   0.49 kB │ gzip:  0.20 kB
+18:26:10 [vite] dist/_astro/Search.astro_astro_type_script_index_0_lang.ZjEmAWQz.js       3.08 kB │ gzip:  1.36 kB
+18:26:10 [vite] dist/_astro/ui-core.yuLFDNla.js                                          57.21 kB │ gzip: 19.01 kB
+18:26:10 [vite] ✓ built in 93ms
+
+ generating static routes 
+18:26:10 λ astro-expressive-code/routes/styles.ts
+18:26:10   └─ /_astro/ec.2s24z.css (+2ms)
+18:26:10 λ astro-expressive-code/routes/scripts.ts
+18:26:10   └─ /_astro/ec.dy9ns.js (+0ms)
+18:26:10 ▶ src/pages/404.astro
+18:26:10   └─ /404.html (+8ms)
+18:26:10 ▶ src/pages/blog/[slug].astro
+18:26:10   ├─ /blog/article-1/index.html (+5ms)
+18:26:10   └─ /blog/article-2/index.html (+3ms)
+18:26:10 ▶ src/pages/blog/index.astro
+18:26:10   └─ /blog/index.html (+2ms)
+18:26:10 λ src/pages/robots.txt.ts
+18:26:10   └─ /robots.txt (+1ms)
+18:26:10 λ src/pages/rss.xml.js
+18:26:10   └─ /rss.xml (+3ms)
+18:26:10 ▶ src/pages/tags/[tag].astro
+18:26:10   ├─ /tags/astrojs/index.html (+3ms)
+18:26:10   ├─ /tags/successes/index.html (+2ms)
+18:26:10   └─ /tags/react/index.html (+2ms)
+18:26:10 ▶ src/pages/index.astro
+18:26:10   └─ /index.html (+5ms)
+18:26:10 ✓ Completed in 87ms.
+
+ generating optimized images 
+18:26:10   ▶ /_astro/32portraitHD_4.XSeeVmmF_Z5nxLp.webp (reused cache entry) (+0ms) (1/1)
+18:26:10 ✓ Completed in 1ms.
+
+18:26:10 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+
+ AstroCompress processing 
+(-64 Bytes)	0.49% reduction in //dist/_astro/_slug_.CuAmLvHH.css
+(-106 Bytes)	0.57% reduction in //dist/_astro/ec.2s24z.css
+(-83 Bytes)	0.57% reduction in //dist/_astro/global.K4qfy6tx.css
+(-180 Bytes)	1.23% reduction in //dist/_astro/ui.CUcZi9mk.css
+(-1.05 KB)	14.63% reduction in //dist/pagefind/pagefind-modular-ui.css
+(-187 Bytes)	1.29% reduction in //dist/pagefind/pagefind-ui.css
+✓ Successfully compressed a total of 6 CSS files for 1.65 KB.
+(-660 Bytes)	5.69% reduction in //dist/404.html
+(-919 Bytes)	6.12% reduction in //dist/index.html
+(-695 Bytes)	5.90% reduction in //dist/blog/index.html
+(-902 Bytes)	4.03% reduction in //dist/blog/article-1/index.html
+(-877 Bytes)	5.09% reduction in //dist/blog/article-2/index.html
+(-701 Bytes)	5.82% reduction in //dist/tags/astrojs/index.html
+(-692 Bytes)	5.82% reduction in //dist/tags/react/index.html
+(-692 Bytes)	5.81% reduction in //dist/tags/successes/index.html
+✓ Successfully compressed a total of 8 HTML files for 5.99 KB.
+(-19 Bytes)	0.62% reduction in //dist/_astro/Search.astro_astro_type_script_index_0_lang.ZjEmAWQz.js
+(-1 Bytes)	0.73% reduction in //dist/_astro/hoisted.BVL59Wqb.js
+(-151 Bytes)	0.25% reduction in //dist/_astro/ui-core.yuLFDNla.js
+(-39 Bytes)	0.12% reduction in //dist/~partytown/partytown-atomics.js
+(-40 Bytes)	0.70% reduction in //dist/~partytown/partytown-media.js
+(-40 Bytes)	0.12% reduction in //dist/~partytown/partytown-sw.js
+(-39 Bytes)	2.56% reduction in //dist/~partytown/partytown.js
+(-24.25 KB)	56.51% reduction in //dist/pagefind/pagefind-highlight.js
+(-108 Bytes)	0.76% reduction in //dist/pagefind/pagefind-modular-ui.js
+(-6.38 KB)	9.78% reduction in //dist/pagefind/pagefind-ui.js
+(-8.61 KB)	28.19% reduction in //dist/pagefind/pagefind.js
+✓ Successfully compressed a total of 11 JavaScript files for 39.67 KB.
+18:26:11 [build] 8 page(s) built in 3.16s
+18:26:11 [build] Complete!
