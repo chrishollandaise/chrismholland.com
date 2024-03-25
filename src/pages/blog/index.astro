@@ -18,16 +18,16 @@ const uniqueTags = getAllUniqueTags(allPosts)
 ---
 
 <BaseLayout title='Blog'>
-  <h2>
+  <h1>
     Blog<a href='/rss.xml'><Icon class='text-2xl' name='mdi:rss' /></a>
-  </h2>
+  </h1>
   {
     allPosts.length == 0 ? (
       <Empty class='text-center' />
     ) : (
       <>
         <div class='text-center'>
-          <h3>Tags:</h3>
+          <h2>Tags:</h2>
           {uniqueTags.map((tag) => {
             return <a href={`/tags/${tag}`}>{<code>{tag}</code>} </a>
           })}

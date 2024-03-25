@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
 
 const { scopedPreflightStyles } = require('tailwindcss-scoped-preflight')
 
@@ -17,7 +16,6 @@ export default {
   ],
   important: true,
   theme: {
-    colors: { 'bahunya-gold': '#e3bc5e', ...colors },
     screens: { xs: { max: '520px' }, ...defaultTheme.screens }
   }
 }

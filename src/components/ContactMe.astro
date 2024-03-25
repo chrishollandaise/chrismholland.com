@@ -1,45 +1,8 @@
----
-// import { db, Contact } from "astro:db";
-// import sendMail from "../util/sendMail";
-export const prerender = false
-if (Astro.request.method === 'POST') {
-  try {
-    const data = await Astro.request.formData()
-
-    const honeypot = data.get('phone')
-    const name = data.get('name')
-    const email = data.get('email')
-    const message = data.get('message')
-    const dateSent = new Date()
-    const clientIP = Astro.clientAddress
-
-    if (honeypot) {
-      return
-    }
-
-    const submission = {
-      name,
-      email,
-      message,
-      dateSent,
-      metadata: { ip: clientIP }
-    }
-
-    // TODO: add a honeypot, and a simple turing test.
-    // Should also look into IP throttling, send one email twice a month
-    //@ts-ignore
-    // await db.insert(Contact).values(submission);
-    // await sendMail(submission);
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message)
-    }
-  }
-  return Astro.redirect('/')
-}
----
-
-<form method='POST' class='xs:flex xs:flex-col xs:gap-5'>
+<form
+  method='POST'
+  action='https://formspree.io/f/mrgnanbw'
+  class='xs:flex xs:flex-col xs:gap-5'
+>
   <label class='xs:flex xs:flex-col'>
     Name:
     <input
