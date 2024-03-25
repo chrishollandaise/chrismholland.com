@@ -17,7 +17,7 @@ export default defineConfig({
 
   build: {
     outputFolder: 'admin',
-    publicFolder: 'src/pages'
+    publicFolder: 'public'
   },
   media: {
     tina: {
@@ -27,7 +27,7 @@ export default defineConfig({
   },
   search: {
     tina: {
-      indexerToken: '',
+      indexerToken: process.env.TINA_INDEXER_TOKEN,
       stopwordLanguages: ['eng']
     },
     indexBatchSize: 100,

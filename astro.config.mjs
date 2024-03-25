@@ -15,7 +15,6 @@ export default defineConfig({
     locales: ['en']
   },
   redirects: {
-    '/admin/index.html': '/admin',
     project: '/tags/project'
   },
   integrations: [

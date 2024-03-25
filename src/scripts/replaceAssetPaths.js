@@ -5,14 +5,16 @@ const postsDirectory = '/src/content/blog/'
 
 // Find and replace strings
 const find = '/src/assets/'
-const replace = '~/assets/'
+let replace = '../../assets/' // update this path based on where files are located
+
+replace = replace.replaceAll('.', '\\.')
 // Special characters (https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended) need to be escaped
 
 import { exec } from 'child_process'
 // execute bash command
 exec(
-  `find ${process.cwd()}${postsDirectory} -type f -name '*.md' -print0 | xargs -0 sed -i -e 's:${find}:${replace}:g'`,
-  // Note: GNU sed that runs on Linux but not on mac (most servers use Linux)
+  `find ${process.cwd()}${postsDirectory} -type f -name '*.md' -print0 | xargs -0 gsed -i -e 's:${find}:${replace}:g'`,
+  // GNU sed that runs on Linux but not on mac
   (error, stdout, stderr) => {
     // error handling
     if (error) {

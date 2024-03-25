@@ -1,9 +1,9 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: Article 3
+title: Article Three
 description: >-
   Here's a description of what this does for me.Here's a description of what
-  this does forrrrrrrrrrrrrrrrrrrrrrrrrrr
+  this does
 pubDate: 2025-01-02T00:00:00.000Z
 draft: true
 tags:

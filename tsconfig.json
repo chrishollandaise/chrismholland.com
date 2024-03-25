@@ -1,6 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "exclude": [
+    "public/admin/*",
     "dist/*",
     "public/*",
     "node_modules",
