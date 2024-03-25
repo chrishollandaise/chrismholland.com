@@ -133,7 +133,7 @@ export default defineConfig({
   media: {
     tina: {
       mediaRoot: 'src/assets',
-      publicFolder: ''
+      publicFolder: './'
     }
   },
   search: {
