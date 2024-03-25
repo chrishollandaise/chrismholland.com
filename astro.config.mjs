@@ -14,6 +14,10 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en']
   },
+  redirects: {
+    '/admin/index.html': '/admin',
+    project: '/tags/project'
+  },
   integrations: [
     sitemap(),
     expressiveCode(),

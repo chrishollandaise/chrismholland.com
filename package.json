@@ -3,12 +3,13 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "tinacms dev -c 'astro dev'",
     "dev:remote": "astro dev --remote",
     "dev:host": "astro dev --host",
     "start": "astro dev",
     "format": "npx prettier 'src/**/*.{js,ts,mjs,cjs,json,astro,css}' --write",
     "lint": "eslint .",
+    "prebuild": "node src/scripts/replaceAssetPaths.js",
     "build:pagefind": "npx pagefind --site 'dist' && cp -r dist/pagefind public/",
     "build": "astro check && astro build | npm run build:post && npm run build:pagefind",
     "build:post": "./src/scripts/postbuild.sh",
@@ -30,10 +31,13 @@
     "astro-icon": "^1.1.0",
     "sharp": "^0.33.2",
     "tailwindcss": "^3.4.1",
-    "tailwindcss-scoped-preflight": "^2.1.0"
+    "tailwindcss-scoped-preflight": "^2.1.0",
+    "tinacms": "^1.6.0"
   },
   "devDependencies": {
     "@pagefind/default-ui": "^1.0.4",
+    "@tinacms/cli": "^1.5.42",
+    "@types/node": "^20.11.30",
     "@typescript-eslint/parser": "^7.3.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
