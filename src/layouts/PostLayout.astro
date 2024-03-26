@@ -8,9 +8,18 @@ import BaseLayout from './BaseLayout.astro'
 import { Icon } from 'astro-icon/components'
 import { renderDate } from '../util/general'
 import Back from '../components/BackButton.astro'
+import GithubSlugger from 'github-slugger'
+const socialImage =
+  frontmatter.ogImage ??
+  `/og-image/${new GithubSlugger().slug(frontmatter.title)}.png`
 ---
 
-<BaseLayout title={frontmatter.title}>
+<BaseLayout
+  title={frontmatter.title}
+  articleDate={new Date(frontmatter.pubDate).toISOString()}
+  ogImage={socialImage}
+  description={frontmatter.description}
+>
   <article role='article' class='border-0' data-pagefind-body>
     <Back href='/blog' />
     <div class='flex gap-2'>

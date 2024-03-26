@@ -1,20 +1,18 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: "Bits and Bytes: Musings from a Developer's Digital Workshop"
-description: >-
-  Here's a description of what this does for me.Here's a description of what
-  this does
-pubDate: 2025-01-02T00:00:00.000Z
-draft: true
+title: My Second Article
+description: Here's a description of what this does for me.Here's a description of what this does for me.
+pubDate: 1999-08-08
+draft: false
 tags:
+  - astrojs
   - react
-  - rust
-  - project
+type: blog
 ---
 
 ## Nubes honore
 
-Lorem markdownum gemma quaeritur superi, pastor nati velle serpentibus foma
+Lorem markdownum gemma quaeritur superi, pastor nati velle serpentibus forma
 praeter posuit Mavortis serpunt. Adsumus magis. In ille comitesque pelago
 laudavit reliquit liceatque servandam haemonii. Tenuere per
 [illa](http://www.polyxena.io/mihi.html) vestra, otia fatentur, tibi [secabant
@@ -24,16 +22,14 @@ stellatus dubiis](http://www.septem.net/), vagantem plurima crura?
 - Olympum qui
 - Haberent flammis precibus coloque
 
-### Subby
-
-Hihi
-
 ## Neptunus sequeretur succrescere
 
 Ossa inmotos, suum [e flumina dilexisse](http://www.feruntlucinam.org/dubita),
 parsque retinens aut usum sepulcro relicto Gorgoneum edentem fugit coloribus
 _pater_; qua. Cubile et calentes Cycno faciat mihi. Sonus cupiens faciente
-angues, meis qua tu virgo, Amphionis nomen animae, tuta.
+angues, meis qua tu virgo, Amphionis nomen animae, tuta.[^1]
+
+[^1]: Reference first footnote with a return to content link.
 
 1. Ubicumque causa
 2. Nautae te insidiisque habuere fidissima nostras praecordia
@@ -61,3 +57,8 @@ artes fera** lentae: est more subsidit. **Vidi Melaneus vaticinatus** data rima:
 arcum nostro, est. Sedens repugnas nostris pennas concurreret truncos sorori et
 loquebatur vincula hortaturque post: gaudere verbaque est ea plebi ab duorum.
 Captus fatebar quoque tu sinit sit agam sed Titania!
+
+```js
+const message = Hello World!
+1 + 1
+```

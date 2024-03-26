@@ -6,7 +6,8 @@ const blogSchema = z.object({
   pubDate: z.date(),
   draft: z.boolean(),
   // take care of any duplicate tags here
-  tags: z.array(z.string()).transform((arr) => Array.from(new Set(arr)))
+  tags: z.array(z.string()).transform((arr) => Array.from(new Set(arr))),
+  ogImage: z.string().optional()
 })
 
 export type BlogSchema = z.infer<typeof blogSchema>

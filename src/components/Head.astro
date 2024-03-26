@@ -1,26 +1,73 @@
 ---
 interface Props {
-  title: string
+  title?: string
+  articleDate?: string
+  description?: string
+  ogImage?: string
 }
 import GlobalNoScript from '../components/GlobalNoScript.astro'
-const { title } = Astro.props
+const { title, articleDate, description, ogImage } = Astro.props
 import '../styles/global.css'
+import { toTitleCase } from '../util/general'
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const socialImageURL = new URL(
+  ogImage ? ogImage : '/social-card.png',
+  Astro.url
+).href
 ---
 
 <head>
   <meta charset='utf-8' />
-  <link rel='icon' type='image/x-icon' href='/favicon.ico' />
-  <meta name='viewport' content='width=device-width' />
+  <meta
+    content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
+    name='viewport'
+  />
   <meta name='generator' content={Astro.generator} />
-  <link rel='sitemap' href='/sitemap-index.xml' />
+  <meta content='IE=edge' http-equiv='X-UA-Compatible' />
+  <meta content={title} name='title' />
+  <meta content={description} name='description' />
+  <meta content='Chris Holland' name='author' />
+  <title>
+    {title ? `${toTitleCase(title)} | Chris Holland` : 'Chris Holland'}
+  </title>
 
-  <!-- RSS -->
+  <!-- SEO (OG, Twitter, JSON-LD) -->
+  <meta content={articleDate ? 'article' : 'website'} property='og:type' />
+  <meta content={title} property='og:title' />
+  <meta content={description} property='og:description' />
+  <meta content={canonicalURL} property='og:url' />
+  <meta content=`Chris Holland's Blog` property='og:site_name' />
+  <meta content=`en` property='og:locale' />
+  <meta content={socialImageURL} property='og:image' />
+  <meta content='1200' property='og:image:width' />
+  <meta content='630' property='og:image:height' />
+  {
+    articleDate && (
+      <>
+        <meta content='Chris Holland' property='article:author' />
+        <meta content={articleDate} property='article:published_time' />
+      </>
+    )
+  }
+  <meta content='summary_large_image' property='twitter:card' />
+  <meta content={canonicalURL} property='twitter:url' />
+  <meta content={title} property='twitter:title' />
+  <meta content={description} property='twitter:description' />
+  <meta content={socialImageURL} property='twitter:image' />
+
+  <!-- Icons -->
+  <link rel='icon' type='image/x-icon' href='/favicon.ico' sizes='any' />
+  <link href='/apple-touch-icon.png' rel='apple-touch-icon' />
+  <!-- <link href={canonicalURL} rel='canonical' /> -->
+
+  <!-- RSS and Sitemaps -->
   <link
     rel='alternate'
     type='application/rss+xml'
     title='Chris Holland'
     href={`${Astro.site}rss.xml`}
   />
+  <link rel='sitemap' href='/sitemap-index.xml' />
   <!-- CSS Styling -->
   <link
     rel='stylesheet'
@@ -35,5 +82,4 @@ import '../styles/global.css'
     src='https://worker-blue-butterfly-5c63.chrishollandaise.workers.dev/apollo/script.js'
   ></script>
   <GlobalNoScript />
-  <title>{title}</title>
 </head>

@@ -10,6 +10,7 @@ import {
 } from '../../util/general'
 import BackButton from '../../components/BackButton.astro'
 import { Icon } from 'astro-icon/components'
+import GithubSlugger from 'github-slugger'
 
 export async function getStaticPaths(): Promise<any> {
   const allPosts = await getCollection('blog', (post) => filterDrafts(post))
@@ -45,7 +46,7 @@ export const prerender = true
       //@ts-ignore
       posts.map((post) => (
         <li class='flex justify-between'>
-          <a href={`/blog/${post.slug}`}>
+          <a href={`/blog/${new GithubSlugger().slug(post.data.title)}`}>
             {post.data.title}
             <DraftTag isDraft={post.data.draft} />
           </a>

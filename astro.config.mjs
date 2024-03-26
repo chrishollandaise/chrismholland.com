@@ -9,7 +9,9 @@ import { squooshImageService } from 'astro/config'
 import compress from 'astro-compress'
 
 export default defineConfig({
-  site: 'https://chrismholland.com',
+  site: import.meta.env.PROD
+    ? 'https://v2.chrismholland.com'
+    : 'http://localhost:4321',
   i18n: {
     defaultLocale: 'en',
     locales: ['en']

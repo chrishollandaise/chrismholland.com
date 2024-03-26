@@ -15,6 +15,7 @@ const {
 import DraftTag from '../components/DraftTag.astro'
 import { renderDate } from '../util/general'
 import Empty from '../components/Empty.astro'
+import GithubSlugger from 'github-slugger'
 ---
 
 {
@@ -42,7 +43,7 @@ import Empty from '../components/Empty.astro'
                 <td>{renderDate(new Date(post.data.pubDate), false)}</td>
               )}
               <td>
-                <a href={`blog/${post.slug}`}>
+                <a href={`blog/${new GithubSlugger().slug(post.data.title)}`}>
                   {post.data.title} <DraftTag isDraft={post.data.draft} />
                 </a>
               </td>

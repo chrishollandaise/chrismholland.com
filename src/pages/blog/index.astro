@@ -10,6 +10,7 @@ import {
 } from '../../util/general'
 import Empty from '../../components/Empty.astro'
 import { Icon } from 'astro-icon/components'
+import GithubSlugger from 'github-slugger'
 
 const allPosts = await getCollection('blog', (post) => filterDrafts(post))
 allPosts.sort(byTime)
@@ -35,7 +36,7 @@ const uniqueTags = getAllUniqueTags(allPosts)
         <ul class='article' class='list-none'>
           {allPosts.map((post) => (
             <li class='flex justify-between'>
-              <a href={`/blog/${post.slug}`}>
+              <a href={`/blog/${new GithubSlugger().slug(post.data.title)}`}>
                 {post.data.title} <DraftTag isDraft={post.data.draft} />
               </a>
 
