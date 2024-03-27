@@ -27,3 +27,5 @@ build-output.txt
 node_modules
 
 *-e
+
+public/pagefind/*
