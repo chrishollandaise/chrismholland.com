@@ -10,7 +10,7 @@ import compress from 'astro-compress'
 
 export default defineConfig({
   site: import.meta.env.PROD
-    ? 'https://v2.chrismholland.com'
+    ? 'https://chrismholland.com'
     : 'http://localhost:4321',
   i18n: {
     defaultLocale: 'en',
