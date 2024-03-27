@@ -197,3 +197,39 @@ dialog[closing] {
     animation: none !important;
   }
 }
+
+.neutral {
+  background: url('/spritesheet.webp') no-repeat -20px -36px;
+  width: 184px;
+  height: 220px;
+}
+
+.glance-left {
+  background: url('/spritesheet.webp') no-repeat -276px -36px;
+  width: 184px;
+  height: 220px;
+}
+
+.glance-right {
+  background: url('/spritesheet.webp') no-repeat -532px -36px;
+  width: 184px;
+  height: 220px;
+}
+
+.happy {
+  background: url('/spritesheet.webp') no-repeat -788px -36px;
+  width: 184px;
+  height: 220px;
+}
+
+.skeptical {
+  background: url('/spritesheet.webp') no-repeat -1044px -36px;
+  width: 184px;
+  height: 220px;
+}
+
+.angry {
+  background: url('/spritesheet.webp') no-repeat -1300px -36px;
+  width: 184px;
+  height: 220px;
+}

@@ -1,0 +1,110 @@
+---
+
+---
+
+<div class='relative'>
+  <figure
+    id='avatar'
+    class=`happy xs:mx-auto`
+    style='max-height: 220px; min-width: 200px; max-width: 184px; margin-left: 0px;'
+  >
+  </figure>
+</div>
+
+<script>
+  import { timeout, TapTracker } from '../util/general'
+  /** Obviously not the best code, but I don't wanna whip up a whole FSM implementation */
+  const image = document.getElementById('avatar')
+  const STATES = {
+    NEUTRAL: 'neutral',
+    GLANCE_LEFT: 'glance-left',
+    GLANCE_RIGHT: 'glance-right',
+    HAPPY: 'happy',
+    SKEPTICAL: 'skeptical',
+    ANGRY: 'angry'
+  } as const
+
+  let isAnimating = false
+  const tapTracker = new TapTracker()
+
+  const getState = (): string | void => {
+    return image?.className
+  }
+
+  const setFrame = (newFrame: string) => {
+    if (!image) return
+    image.className = `xs:mx-auto ${newFrame}`
+  }
+
+  const annoyedEvent = (e: MouseEvent | TouchEvent) => {
+    if (isAnimating) return
+
+    const ANNOYED_CLICKS = 4
+    const ANGRY_CLICKS = 10
+
+    let clickCount
+
+    if (e.type === 'touchend') {
+      tapTracker.handlePointerDown(e as TouchEvent)
+      clickCount = tapTracker.tapCount
+    } else if (e.type === 'click') {
+      clickCount = e.detail
+    } else {
+      return
+    }
+
+    if (clickCount === ANNOYED_CLICKS) {
+      setFrame(STATES.SKEPTICAL)
+      setTimeout(async () => {
+        if (isAnimating || getState() === STATES.ANGRY) return
+        isAnimating = true
+        setFrame(STATES.NEUTRAL)
+        await timeout(3000)
+        setFrame(STATES.HAPPY)
+        isAnimating = false
+      }, 5000)
+    } else if (clickCount === ANGRY_CLICKS) {
+      setFrame(STATES.ANGRY)
+      setTimeout(() => {
+        setTimeout(async () => {
+          if (isAnimating) return
+          isAnimating = true
+          setFrame(STATES.SKEPTICAL)
+          await timeout(2000)
+          setFrame(STATES.NEUTRAL)
+          await timeout(3000)
+          setFrame(STATES.HAPPY)
+          isAnimating = false
+        }, 5000)
+      })
+    }
+  }
+
+  const welcomeEvent = () => {
+    if (isAnimating || image) return
+    setFrame(STATES.HAPPY)
+  }
+
+  const glancingEvent = async () => {
+    if (isAnimating) return
+    const PLAYBACK = [
+      STATES.NEUTRAL,
+      STATES.GLANCE_LEFT,
+      STATES.NEUTRAL,
+      STATES.GLANCE_RIGHT
+    ]
+
+    for (let i = 0; i <= PLAYBACK.length; i++) {
+      isAnimating = true
+      setFrame(PLAYBACK[i % PLAYBACK.length])
+      await timeout(1500)
+    }
+    setFrame(STATES.HAPPY)
+    isAnimating = false
+  }
+
+  setInterval(glancingEvent, 20000)
+  image?.addEventListener('click', annoyedEvent)
+  image?.addEventListener('touchend', annoyedEvent)
+  window.addEventListener('DOMContentLoaded', welcomeEvent)
+</script>
