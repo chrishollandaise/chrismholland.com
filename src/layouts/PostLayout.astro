@@ -12,6 +12,7 @@ import GithubSlugger from 'github-slugger'
 const socialImage =
   frontmatter.ogImage ??
   `/og-image/${new GithubSlugger().slug(frontmatter.title)}.png`
+import JsonLD from '../components/JsonLD.astro'
 ---
 
 <BaseLayout
@@ -19,6 +20,7 @@ const socialImage =
   articleDate={new Date(frontmatter.pubDate).toISOString()}
   ogImage={socialImage}
   description={frontmatter.description}
+  tags={frontmatter.tags}
 >
   <article role='article' class='border-0' data-pagefind-body>
     <Back href='/blog' />

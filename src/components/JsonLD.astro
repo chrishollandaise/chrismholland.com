@@ -1,0 +1,35 @@
+---
+const { title, description, pubDate, tags, ogImage } = Astro.props
+
+const blogPostSchema = () => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: description,
+    image: ogImage,
+    keywords: tags,
+    author: {
+      '@type': 'Person',
+      name: 'Chris Holland',
+      url: 'https://v2.chrismholland.com'
+    },
+
+    datePublished: new Date(pubDate).toISOString().substring(0, 10)
+  }
+}
+
+const defaultSchema = () => {
+  return {
+    '@context': 'https://schema.org/',
+    '@type': 'WebSite',
+    name: "Chris Holland's Blog",
+    url: 'https://v2.chrismholland.com'
+  }
+}
+---
+
+<script
+  type='application/ld+json'
+  set:html={JSON.stringify(pubDate ? blogPostSchema() : defaultSchema())}
+/>

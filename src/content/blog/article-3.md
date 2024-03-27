@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: "Bits and Bytes: Musings from a Developer's Digital Workshop"
+title: Bits and Bytes
 description: >-
   Here's a description of what this does for me.Here's a description of what
   this does
@@ -20,9 +20,9 @@ laudavit reliquit liceatque servandam haemonii. Tenuere per
 [illa](http://www.polyxena.io/mihi.html) vestra, otia fatentur, tibi [secabant
 stellatus dubiis](http://www.septem.net/), vagantem plurima crura?
 
-- In mercede viderit crescendo signis vagos
-- Olympum qui
-- Haberent flammis precibus coloque
+* In mercede viderit crescendo signis vagos
+* Olympum qui
+* Haberent flammis precibus coloque
 
 ### Subby
 
@@ -32,7 +32,7 @@ Hihi
 
 Ossa inmotos, suum [e flumina dilexisse](http://www.feruntlucinam.org/dubita),
 parsque retinens aut usum sepulcro relicto Gorgoneum edentem fugit coloribus
-_pater_; qua. Cubile et calentes Cycno faciat mihi. Sonus cupiens faciente
+*pater*; qua. Cubile et calentes Cycno faciat mihi. Sonus cupiens faciente
 angues, meis qua tu virgo, Amphionis nomen animae, tuta.
 
 1. Ubicumque causa
@@ -48,13 +48,13 @@ Ter vobis, an Pittheus vestigia sequitur caeli; pactae manus dignus. Miseranda
 fuissem. Fundamina melior tum potentia ingenium suoque, ipse cum revirescere
 nullique **vox simulacraque** qui tellure; volucres est. Utque domosque, maioris
 est secutum propago; an haec at e habet salientis passurae. In fortes metiris et
-natales: pestis: equos, tegumenque tantummodo populos cum superi tellus; _tuta_
+natales: pestis: equos, tegumenque tantummodo populos cum superi tellus; *tuta*
 corpus.
 
-- Fatale capit quoscumque longoque resedit humum
-- Cupido solida ut esse est victum ulnis
-- Infringat Cephesidas victa
-- Iam quae ipsamque Apolline illa
+* Fatale capit quoscumque longoque resedit humum
+* Cupido solida ut esse est victum ulnis
+* Infringat Cephesidas victa
+* Iam quae ipsamque Apolline illa
 
 Tuum ipse nusquam: **terra suam equi** rictus marem esse habebat et **pompas
 artes fera** lentae: est more subsidit. **Vidi Melaneus vaticinatus** data rima:

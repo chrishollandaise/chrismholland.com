@@ -16,6 +16,10 @@ export default {
   ],
   important: true,
   theme: {
-    screens: { xs: { max: '520px' }, ...defaultTheme.screens }
+    screens: {
+      xs: { max: '520px' },
+      xxs: { max: '479px' },
+      ...defaultTheme.screens
+    }
   }
 }

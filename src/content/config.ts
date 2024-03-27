@@ -1,7 +1,7 @@
 import { z, defineCollection } from 'astro:content'
 
 const blogSchema = z.object({
-  title: z.string().max(60, 'Keep title under 60 characters'),
+  title: z.string().max(60, 'Keep title under or at 60 characters'),
   description: z.string().max(160, 'Keep description under 160 characters'),
   pubDate: z.date(),
   draft: z.boolean(),
