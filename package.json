@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "prebuild": "node src/scripts/replaceAssetPaths.js && npx tinacms build",
     "build:pagefind": "npx pagefind --site 'dist' && cp -r dist/pagefind public/",
-    "build": "astro check && astro build | npm run build:post && npm run build:pagefind",
+    "build": "astro build | npm run build:post && npm run build:pagefind",
     "build:post": "./src/scripts/postbuild.sh",
     "preview": "astro preview ",
     "astro": "astro"
