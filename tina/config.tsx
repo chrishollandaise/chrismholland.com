@@ -173,13 +173,25 @@ export default defineConfig({
         path: 'src/content/blog',
         defaultItem: () => {
           return {
+            layout: '../../layouts/PostLayout.astro',
             title: 'New Post',
             description: '',
-            pubDate: null,
-            draft: true
+            pubDate: new Date(),
+            draft: true,
+            tags: []
           }
         },
         fields: [
+          {
+            type: 'string',
+            name: 'layout',
+            label: 'Page Layout',
+            ui: {
+              component: 'select',
+              //@ts-ignore
+              options: ['../../layouts/PostLayout.astro']
+            }
+          },
           {
             type: 'string',
             name: 'title',
