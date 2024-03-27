@@ -1,0 +1,213 @@
+---
+// Heavy inspiration taken from Astro Cactus -> https://github.com/chrismwilliams/astro-theme-cactus/blob/8c8a6cdb21a29e7d145e7883014debc15cabb5de/src/components/Search.astro#L151
+import '@pagefind/default-ui/css/ui.css'
+import { Icon } from 'astro-icon/components'
+---
+
+<site-search id='search' class='h-6'>
+  <button
+    aria-label='open search menu'
+    class='twp border-0 p-0 text-2xl'
+    style='background: none; !important '
+    data-open-modal
+    disabled
+  >
+    <Icon name='mdi:magnify' />
+  </button>
+  <!-- expand border roudned to small -->
+  <dialog
+    aria-label='Search through site content'
+    class='h-full max-h-full w-full max-w-full border border-[rgb(33,37,44)] shadow backdrop:backdrop-blur xs:rounded-none xs:border-0 sm:mx-auto sm:mb-auto sm:mt-16 sm:h-max sm:max-h-[calc(100%-8rem)] sm:min-h-[15rem] sm:w-5/6 sm:max-w-[48rem] sm:rounded-md'
+  >
+    <div class='dialog-frame flex flex-col gap-4 p-6 pt-12 sm:pt-6'>
+      <button
+        class='m-0 ms-auto cursor-pointer border-none p-0 text-3xl font-semibold'
+        style='background: transparent;'
+        data-close-modal><Icon name='mdi:close' /></button
+      >
+      {
+        (
+          // import.meta.env.DEV ? (
+          //   <div class='mx-auto text-center'>
+          //     <p>
+          //       Search is only available in production builds. <br />
+          //       Try building and previewing the site to test it out locally.
+          //     </p>
+          //   </div>
+          // ) : (
+          <div class='search-container'>
+            <div id='my__search' />
+          </div>
+          // )
+        )
+      }
+    </div>
+  </dialog>
+</site-search>
+
+<script>
+  class SiteSearch extends HTMLElement {
+    private closeBtn: HTMLButtonElement
+    private dialog: HTMLDialogElement
+    private dialogFrame: HTMLDivElement
+    private openBtn: HTMLButtonElement
+
+    closeCleanUp = () => {
+      this.dialog.close()
+      this.dialog.removeAttribute('closing')
+      this.revertBodyPageScroll()
+      window.removeEventListener('click', this.onWindowClick)
+    }
+
+    closeModal = () => {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+      if (this.dialog.open) {
+        this.dialog.setAttribute('closing', '')
+
+        if (!mediaQuery || mediaQuery.matches) {
+          this.closeCleanUp()
+        } else {
+          this.dialog.addEventListener('animationend', this.closeCleanUp, {
+            once: true
+          })
+        }
+      }
+    }
+
+    openModal = (event?: MouseEvent) => {
+      this.disableBodyPageScroll()
+      this.dialog.showModal()
+      this.querySelector('input')?.focus()
+      event?.stopPropagation()
+      window.addEventListener('click', this.onWindowClick)
+    }
+
+    onWindowClick = (event: MouseEvent) => {
+      // check if it's a link
+      const isLink = 'href' in (event.target || {})
+      // make sure the click is either a link or outside of the dialog
+      if (
+        isLink ||
+        (document.body.contains(event.target as Node) &&
+          !this.dialogFrame.contains(event.target as Node))
+      )
+        this.closeModal()
+    }
+
+    onWindowKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'k' && e.ctrlKey && !this.dialog.open) {
+        this.openModal()
+        e.preventDefault()
+      } else {
+        if (e.key === 'k' && e.ctrlKey && this.dialog.open) {
+          this.closeModal()
+          e.preventDefault()
+        }
+      }
+    }
+
+    constructor() {
+      super()
+      this.openBtn = this.querySelector<HTMLButtonElement>(
+        'button[data-open-modal]'
+      )!
+      this.closeBtn = this.querySelector<HTMLButtonElement>(
+        'button[data-close-modal]'
+      )!
+      this.dialog = this.querySelector('dialog')!
+      this.dialogFrame = this.querySelector('.dialog-frame')!
+
+      this.openBtn.addEventListener('click', this.openModal)
+      this.openBtn.disabled = false
+      this.closeBtn.addEventListener('click', this.closeModal)
+    }
+
+    connectedCallback() {
+      // Listen for keyboard shortcut
+      window.addEventListener('keydown', this.onWindowKeydown)
+
+      // only add pagefind in production
+      //   if (import.meta.env.DEV) return
+      const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1))
+      onIdle(async () => {
+        const { PagefindUI } = await import('@pagefind/default-ui')
+        new PagefindUI({
+          baseUrl: import.meta.env.BASE_URL,
+          bundlePath:
+            import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
+          element: '#my__search',
+          showImages: false,
+          showSubResults: true,
+          highlightParam: 'highlight'
+        })
+        this.querySelector('.pagefind-ui__search-input')?.addEventListener(
+          'keyup',
+          (e: any) => {
+            if (e.key === 'Enter') {
+              e.target.blur()
+            }
+          }
+        )
+      })
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('keydown', this.onWindowKeydown)
+    }
+
+    disableBodyPageScroll() {
+      document.body.style.overflow = 'hidden'
+      document.body.style.height = '100%'
+    }
+
+    revertBodyPageScroll() {
+      document.body.style.overflow = 'auto'
+      document.body.style.height = 'auto'
+    }
+  }
+
+  customElements.define('site-search', SiteSearch)
+</script>
+
+<style is:global>
+  :root {
+    --pagefind-ui-font: inherit;
+  }
+
+  #my__search .pagefind-ui__search-clear {
+    width: calc(60px * var(--pagefind-ui-scale));
+    padding: 0;
+    text-align: center;
+    color: rgb(139, 148, 158);
+  }
+
+  #my__search .pagefind-ui__message {
+    color: rgb(139, 148, 158);
+  }
+
+  #my__search .pagefind-ui__result {
+    border: 0;
+  }
+
+  #my__search .pagefind-ui__result-link {
+    color: #e3bc5e;
+  }
+
+  #my__search mark {
+    background-color: #e3bc5e;
+    border-radius: 2px;
+    color: #1a242f;
+    font-weight: 600;
+  }
+</style>
+
+<style>
+  #my__search {
+    --pagefind-ui-primary: #1c76c5;
+    --pagefind-ui-text: rgb(227, 233, 240);
+    --pagefind-ui-background: #1a242f;
+    --pagefind-ui-border: --var--(--border-bright);
+    --pagefind-ui-border-width: 1px;
+  }
+</style>

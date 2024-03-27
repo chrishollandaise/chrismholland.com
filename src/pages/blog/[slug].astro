@@ -1,0 +1,29 @@
+---
+import { getEntry } from 'astro:content'
+import type { GetStaticPaths } from 'astro'
+import { getCollection } from 'astro:content'
+import { filterDrafts } from '../../util/general'
+import GithubSlugger from 'github-slugger'
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('blog', (posts) => filterDrafts(posts))
+
+  return posts.map((post) => ({
+    params: {
+      slug: new GithubSlugger().slug(post.data.title)
+    },
+    props: {
+      post
+    }
+  }))
+}) satisfies GetStaticPaths
+
+const { post } = Astro.props
+
+const entry = await getEntry('blog', post.slug)
+const { Content } = await entry.render()
+
+export const prerender = true
+---
+
+<Content />

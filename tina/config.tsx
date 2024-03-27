@@ -116,6 +116,9 @@ export default defineConfig({
       cms.plugins.add(screenPlugin)
     }
 
+    cms.flags.set('branch-switcher', true)
+    cms.flags.set('admin', true)
+
     return cms
   },
 
@@ -149,32 +152,75 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: 'misc',
+        label: 'Other',
+        path: 'src/content/misc',
+        fields: [
+          {
+            type: 'rich-text',
+            name: 'body',
+            label: 'Body',
+            isBody: true,
+            parser: {
+              type: 'mdx'
+            }
+          }
+        ]
+      },
+      {
         name: 'blog',
         label: 'Posts',
         path: 'src/content/blog',
         defaultItem: () => {
           return {
+            layout: '../../layouts/PostLayout.astro',
             title: 'New Post',
             description: '',
-            pubDate: '',
-            draft: true
+            pubDate: new Date(),
+            draft: true,
+            tags: []
           }
         },
         fields: [
           {
             type: 'string',
+            name: 'layout',
+            label: 'Page Layout',
+            ui: {
+              component: 'select',
+              //@ts-ignore
+              options: ['../../layouts/PostLayout.astro']
+            }
+          },
+          {
+            type: 'string',
             name: 'title',
             label: 'Title',
             isTitle: true,
-            required: true
+            required: true,
+            ui: {
+              validate: (value, data) => {
+                const lengthOfTitle = value?.length || 0
+                if (lengthOfTitle > 60) {
+                  return 'Keep title under or at 60 characters'
+                }
+              }
+            }
           },
           {
             type: 'string',
             name: 'description',
             label: 'Description',
-            required: true
+            required: true,
+            ui: {
+              validate: (value, data) => {
+                const lengthOfDesc = value?.length || 0
+                if (lengthOfDesc > 160) {
+                  return 'Keep title under or at 160 characters'
+                }
+              }
+            }
           },
-
           {
             type: 'datetime',
             name: 'pubDate',

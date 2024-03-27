@@ -1,0 +1,16 @@
+---
+interface Props {
+  href?: string
+  class?: string
+}
+const { href = '', class: className } = Astro.props
+import { Icon } from 'astro-icon/components'
+---
+
+<a
+  data-pagefind-ignore
+  href={href}
+  class:list={['mb-5 flex items-center', className]}
+>
+  <Icon class='inline-block text-xl' name='mdi:arrow-left-thin' /> Back</a
+>

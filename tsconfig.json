@@ -1,0 +1,16 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "exclude": [
+    "public/admin/*",
+    "dist/*",
+    "public/*",
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./node_modules/@types/node/index.d.ts"
+  ],
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "allowJs": true
+  }
+}

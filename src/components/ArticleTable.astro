@@ -1,0 +1,65 @@
+---
+interface Props {
+  articles: any
+  includeProjectTag?: boolean
+  tableHeaders?: string[]
+  excludeDate?: boolean
+  includeDesc?: boolean
+}
+const {
+  articles,
+  includeProjectTag = true,
+  tableHeaders,
+  excludeDate = false
+} = Astro.props
+import DraftTag from '../components/DraftTag.astro'
+import { renderDate } from '../util/general'
+import Empty from '../components/Empty.astro'
+import GithubSlugger from 'github-slugger'
+---
+
+{
+  articles.length == 0 ? (
+    <Empty />
+  ) : (
+    <table>
+      <thead class='text-center'>
+        {tableHeaders ? (
+          tableHeaders.map((header) => <th>{header}</th>)
+        ) : (
+          <>
+            <th>Date</th>
+            <th>Article</th>
+            <th>Tags</th>
+          </>
+        )}
+      </thead>
+      <tbody>
+        {articles.map((post: any) => {
+          post.data.tags.sort()
+          return (
+            <tr>
+              {!excludeDate && (
+                <td>{renderDate(new Date(post.data.pubDate), false)}</td>
+              )}
+              <td>
+                <a href={`blog/${new GithubSlugger().slug(post.data.title)}`}>
+                  {post.data.title} <DraftTag isDraft={post.data.draft} />
+                </a>
+              </td>
+              <td class='flex gap-2'>
+                {post.data.tags
+                  .filter((tag: string) => tag !== 'project')
+                  .map((tag: any) => (
+                    <a href={`/tags/${tag}`}>
+                      <code>{tag}</code>
+                    </a>
+                  ))}
+              </td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+  )
+}

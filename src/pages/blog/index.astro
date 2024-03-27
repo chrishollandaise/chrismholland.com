@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+import DraftTag from '../../components/DraftTag.astro'
+import {
+  renderDate,
+  getAllUniqueTags,
+  byTime,
+  filterDrafts
+} from '../../util/general'
+import Empty from '../../components/Empty.astro'
+import { Icon } from 'astro-icon/components'
+import GithubSlugger from 'github-slugger'
+
+const allPosts = await getCollection('blog', (post) => filterDrafts(post))
+allPosts.sort(byTime)
+
+const uniqueTags = getAllUniqueTags(allPosts)
+---
+
+<BaseLayout title='Blog'>
+  <h1>
+    Blog<a href='/rss.xml'><Icon class='text-2xl' name='mdi:rss' /></a>
+  </h1>
+  {
+    allPosts.length == 0 ? (
+      <Empty class='text-center' />
+    ) : (
+      <>
+        <div class='text-center'>
+          <h2>Tags:</h2>
+          {uniqueTags.map((tag) => {
+            return <a href={`/tags/${tag}`}>{<code>{tag}</code>} </a>
+          })}
+        </div>
+        <ul class='article' class='list-none'>
+          {allPosts.map((post) => (
+            <li class='flex justify-between'>
+              <a href={`/blog/${new GithubSlugger().slug(post.data.title)}`}>
+                {post.data.title} <DraftTag isDraft={post.data.draft} />
+              </a>
+
+              <span class='text-end'>{renderDate(post.data.pubDate)}</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,72 @@
+---
+import type { BlogSchema } from '../content/config'
+interface Props {
+  frontmatter: BlogSchema
+}
+const { frontmatter } = Astro.props
+import BaseLayout from './BaseLayout.astro'
+import { Icon } from 'astro-icon/components'
+import { renderDate } from '../util/general'
+import Back from '../components/BackButton.astro'
+import GithubSlugger from 'github-slugger'
+const socialImage =
+  frontmatter.ogImage ??
+  `/og-image/${new GithubSlugger().slug(frontmatter.title)}.png`
+import JsonLD from '../components/JsonLD.astro'
+---
+
+<BaseLayout
+  title={frontmatter.title}
+  articleDate={new Date(frontmatter.pubDate).toISOString()}
+  ogImage={socialImage}
+  description={frontmatter.description}
+  tags={frontmatter.tags}
+>
+  <article role='article' class='border-0' data-pagefind-body>
+    <Back href='/blog' />
+    <div class='flex gap-2'>
+      <small>{renderDate(new Date(frontmatter.pubDate))}</small>
+    </div>
+    <h1 class='mb-0 mr-0 mt-0' data-pagefind-meta='title'>
+      {frontmatter.title}
+    </h1>
+    <ul aria-label='tags' class='flex list-none items-center gap-2 pl-0'>
+      <Icon aria-hidden='true' name='mdi:tags' />
+      {
+        (() => {
+          frontmatter.tags.sort()
+          return frontmatter.tags.map((tag: string) => (
+            <li>
+              <a href={`/tags/${tag}`}>
+                <small>
+                  <code>{tag}</code>
+                </small>
+              </a>
+            </li>
+          ))
+        })()
+      }
+    </ul>
+    <div id='article-body'>
+      <slot />
+    </div>
+  </article>
+
+  <script
+    is:inline
+    src='https://giscus.app/client.js'
+    data-repo='chrishollandaise/personal-website'
+    data-repo-id='R_kgDOGkkVAQ'
+    data-category='Announcements'
+    data-category-id='DIC_kwDOGkkVAc4CeFW-'
+    data-mapping='pathname'
+    data-strict='0'
+    data-reactions-enabled='1'
+    data-emit-metadata='0'
+    data-input-position='top'
+    data-theme='preferred_color_scheme'
+    data-lang='en'
+    data-loading='lazy'
+    crossorigin='anonymous'
+    async></script>
+</BaseLayout>

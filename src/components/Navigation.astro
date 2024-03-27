@@ -1,0 +1,89 @@
+---
+type Props = Record<string, never>
+import { Icon } from 'astro-icon/components'
+import Search from '../components/Search.astro'
+---
+
+<nav
+  role='navigation'
+  class='items-start xs:flex xs:flex-wrap xs:justify-between'
+>
+  <a aria-label='link to home page' class='block self-start' href='/'
+    >[chris holland]</a
+  >
+
+  <ul
+    id='menu'
+    data-state='open'
+    class='animate-scale xs:data-[state=open]:opacity-1 flex flex-row align-top transition-opacity duration-300 xs:order-last xs:hidden xs:basis-full xs:flex-col xs:text-center xs:data-[state=close]:opacity-0'
+  >
+    <!-- easier to click link since whole block is clickable -->
+    <li>
+      <a class='block' href='/blog'>writings</a>
+    </li>
+    <li>
+      <a class='block' ' href='/tags/project'>projects</a>
+    </li>
+    <li>
+      <a class='block' href='/Holland_Chris_Resume.pdf'>resume</a>
+    </li>
+    <li>
+      <a class='block' href='/contact'>contact</a>
+    </li>
+  </ul>
+
+  <div class='my-[10px] ml-auto mr-3 flex gap-3'>
+    <Search />
+    <button
+      style='background: transparent'
+      id='menu-btn'
+      aria-label='menu open and close button'
+      class='twp hidden self-center border-0 p-0 text-2xl xs:order-last xs:block'
+    >
+      <Icon
+        class='hidden p-0 xs:block'
+        name='mdi:hamburger-menu'
+        id='menu-burger'
+      />
+      <Icon
+        id='close'
+        style='background: none; !important'
+        class='hidden xs:hidden'
+        name='mdi:close'
+      />
+    </button>
+  </div>
+</nav>
+
+<script>
+  const menu: Element | null = document.querySelector('#menu')
+  const closeIcon: Element | null = document.querySelector('#close')
+  const menuBurgerIcon: Element | null = document.querySelector('#menu-burger')
+  const menuButton: Element | null = document.querySelector('#menu-btn')
+
+  menuButton?.addEventListener('click', (e: Event) => {
+    if (menu?.classList.contains('xs:hidden')) {
+      // Reveal mobile menu
+      menu.classList.replace('xs:hidden', 'xs:flex')
+      // Show close button
+      closeIcon?.classList.replace('xs:hidden', 'xs:block')
+      menuBurgerIcon?.classList.add('xs:block', 'xs:hidden')
+    } else {
+      // Hide mobile menu
+      menu?.classList.replace('xs:flex', 'xs:hidden')
+      // Hide close button
+      closeIcon?.classList.replace('xs:block', 'xs:hidden')
+      menuBurgerIcon?.classList.replace('xs:hidden', 'xs:block')
+      menu?.setAttribute('state', 'close')
+    }
+  })
+
+  const nonMobile = window.matchMedia('(min-width: 521px)')
+  nonMobile.addEventListener('change', () => {
+    if (nonMobile.matches) {
+      menu?.classList.replace('xs:flex', 'xs:hidden')
+      closeIcon?.classList.replace('xs:block', 'xs:hidden')
+      menuBurgerIcon?.classList.replace('xs:hidden', 'xs:block')
+    }
+  })
+</script>

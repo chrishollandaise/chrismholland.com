@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+import Avatar from '../components/Avatar.astro'
+import ArticleTable from '../components/ArticleTable.astro'
+import SocialStack from '../components/SocialStack.astro'
+import { filterDrafts } from '../util/general'
+import { getEntry } from 'astro:content'
+
+const latestArticles = await getCollection('blog', (post) => {
+  return !post.data.tags.includes('project') && filterDrafts(post)
+})
+
+latestArticles.sort((a, b) => {
+  return b.data.pubDate.getTime() - a.data.pubDate.getTime()
+})
+
+const projects = await getCollection('blog', (post) => {
+  return post.data.tags.includes('project') && filterDrafts(post)
+})
+
+projects.sort((a, b) => {
+  return a.data.title > b.data.title ? 1 : -1
+})
+
+const introduction = await (await getEntry('misc', 'who-am-i')).render()
+const links = await (await getEntry('misc', 'quick-links')).render()
+---
+
+<BaseLayout title='Home'>
+  <h1 class='mb-0 mt-0'>Chris Holland</h1>
+  <h2 class='mt-0 text-xl text-[#e3bc5e] xs:text-balance'>
+    Software Engineer - Seattle, WA
+  </h2>
+  <section>
+    <h2 class='sr-only'>About me</h2>
+    <div class='article flex items-center xs:flex-col xs:text-balance'>
+      <Avatar />
+      <div class='xs:text-center'>
+        <introduction.Content />
+        <p class='font-bold'>Follow me on:</p>
+        <SocialStack class='xs:justify-center' />
+      </div>
+    </div>
+  </section>
+  <section>
+    <h2>Latest Posts</h2>
+    <ArticleTable articles={latestArticles.splice(0, 5)} />
+  </section>
+  <section>
+    <h2>Noteworthy Projects</h2>
+    <ArticleTable
+      articles={projects}
+      includeProjectTag={false}
+      tableHeaders={['Project', 'Tech']}
+      excludeDate
+    />
+  </section>
+  <section>
+    <h2>Quick Links</h2>
+    <links.Content />
+  </section>
+</BaseLayout>
